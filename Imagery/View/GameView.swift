@@ -79,6 +79,7 @@ struct GameView: View {
                                 }
                                 .font(.subheadline)
                                 .fontWeight(.semibold)
+                                .foregroundColor(Color.OasisColors.white)
                                 .padding(.vertical, 16)
                                 .padding(.horizontal, margin)
                             Divider()
@@ -147,6 +148,7 @@ private extension GameView {
             Text(content)
                 .speakOnTap(content)
                 .font(.headline)
+                .foregroundColor(Color.OasisColors.white)
                 .frame(maxWidth: .infinity, alignment: .leadingFirstTextBaseline)
             
             Image(img)
