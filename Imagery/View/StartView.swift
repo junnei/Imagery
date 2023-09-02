@@ -11,12 +11,12 @@ struct StartView: View {
     var body: some View {
         VStack {
             Text("당신의 이야기의 소재를\n랜덤으로 뽑아보아요")
-                .foregroundColor(Color.Yellow.yellow.color)
+                .foregroundColor(Color.OasisColors.yellow)
                 .font(.system(size: 32))
                 .bold()
             Spacer()
             RoundedRectangle(cornerRadius: 12)
-                .fill(Color.Yellow.yellow.color)
+                .fill(Color.OasisColors.yellow)
                 .frame(height: 128)
                 .overlay {
                     Text("랜덤 소재 뽑기")
@@ -28,7 +28,7 @@ struct StartView: View {
                 }
             Spacer()
             RoundedRectangle(cornerRadius: 12)
-                .fill(Color.Yellow.yellow.color)
+                .fill(Color.OasisColors.yellow)
                 .frame(height: 72)
                 .overlay {
                     Text("다음")

@@ -34,7 +34,7 @@ struct GameView: View {
     
     var body: some View {
         RoundedRectangle(cornerRadius: 12)
-            .fill(Color.Yellow.yellow.color)
+            .fill(Color.OasisColors.yellow)
             .overlay {
                 VStack{
                     ForEach(dataManager.itemData, id: \.id) { item in
@@ -61,7 +61,7 @@ struct GameView: View {
                     }
                     .padding()
                 }
-                .foregroundColor(Color.DarkGreen.darkGreen.color)
+                .foregroundColor(Color.OasisColors.darkGreen)
             }
             .padding()
             .onAppear {
