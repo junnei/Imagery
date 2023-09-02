@@ -7,17 +7,38 @@
 
 import Foundation
 
-struct Item: Codable, Identifiable {
+struct Instruction: Decodable {
     var id: Int
-    var HP: Int
+    var hp: Int
+    var theme: String
+    var background: String
     var content: String
     var choices: [String: String]
+    var state: String
+}
+
+struct InstructionResponse: Decodable {
+   let instruction: [Instruction]
+}
+
+/*
+struct Item: Codable, Identifiable {
+    var id: Int
+    var hp: Int
+    var theme: String
+    var background: String
+    var content: String
+    var choices: [String: String]
+    var state: String
     
-    enum CodingKeys: String, CodingKey {
-        case id = "ID"
-        case HP
+    enum CodingKeys: Int, CodingKey {
+        case id = 0
+        case hp
+        case theme
+        case background
         case content
         case choices
+        case state
     }
 }
 
@@ -41,3 +62,5 @@ func loadJson<T: Decodable>(_ filename: String) -> T {
         fatalError("Unable to parse \(filename): \(error)")
     }
 }
+
+*/
