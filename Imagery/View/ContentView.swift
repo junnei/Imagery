@@ -20,7 +20,7 @@ struct ContentView: View {
     @State private var isLoading = false
     var body: some View {
         ZStack {
-            Color.darkGreen
+            Color.DarkGreen.darkGreen70.color
                 .ignoresSafeArea()
             switch gameManager.gameState {
             case .initial:
