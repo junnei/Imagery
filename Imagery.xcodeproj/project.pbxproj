@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		5BF461BB2AA3B1F100E36BDA /* OwnStoryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BF461BA2AA3B1F100E36BDA /* OwnStoryView.swift */; };
 		BF9A267E2AA1270500F73E17 /* ImageryApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF9A267D2AA1270500F73E17 /* ImageryApp.swift */; };
 		BF9A26802AA1270500F73E17 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF9A267F2AA1270500F73E17 /* ContentView.swift */; };
 		BF9A26822AA1270600F73E17 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = BF9A26812AA1270600F73E17 /* Assets.xcassets */; };
@@ -21,6 +22,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		5BF461BA2AA3B1F100E36BDA /* OwnStoryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OwnStoryView.swift; sourceTree = "<group>"; };
 		BF9A267A2AA1270500F73E17 /* Imagery.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Imagery.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		BF9A267D2AA1270500F73E17 /* ImageryApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageryApp.swift; sourceTree = "<group>"; };
 		BF9A267F2AA1270500F73E17 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -96,6 +98,7 @@
 			children = (
 				BF9A267F2AA1270500F73E17 /* ContentView.swift */,
 				BF9A268E2AA1E86700F73E17 /* StartView.swift */,
+				5BF461BA2AA3B1F100E36BDA /* OwnStoryView.swift */,
 				BF9A26922AA1E99E00F73E17 /* GameView.swift */,
 			);
 			path = View;
@@ -195,6 +198,7 @@
 				BF9A269B2AA1EEBB00F73E17 /* DataManager.swift in Sources */,
 				BF9A267E2AA1270500F73E17 /* ImageryApp.swift in Sources */,
 				BF9A268C2AA1C8AA00F73E17 /* Color+.swift in Sources */,
+				5BF461BB2AA3B1F100E36BDA /* OwnStoryView.swift in Sources */,
 				BF9A268F2AA1E86700F73E17 /* StartView.swift in Sources */,
 				BF9A26982AA1EA4800F73E17 /* Item.swift in Sources */,
 				BF9A26932AA1E99E00F73E17 /* GameView.swift in Sources */,
