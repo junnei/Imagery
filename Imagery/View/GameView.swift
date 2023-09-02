@@ -31,6 +31,7 @@ enum HeaderItem {
     case hp
     case heart
     case heartFill
+    case xmark
     
     var label: String {
         switch self {
@@ -44,6 +45,8 @@ enum HeaderItem {
             return "♡"
         case .heartFill:
             return "♥︎"
+        case .xmark:
+            return "xmark.circle.fill"
         }
     }
 }
@@ -55,34 +58,43 @@ struct GameView: View {
     //[TODO]: Add func recognize text
     @State private var hpString: String = ""
     @State private var imgName = "DALL-E"
+    @State private var showImageOnly = false
     
     let margin = 20.0
     let radius = 8.0
     
     var body: some View {
-        VStack{
-            ForEach(dataManager.itemData, id: \.id) { item in
-                HeaderView(Int(item.hp.description) ?? 5)
-                    .foregroundColor(Color.OasisColors.white)
-                    .padding(.bottom, 39)
-                    .padding(.horizontal, margin)
-                
-                StoryView(item.content, imgName)
-                
-                VStack {
-                    ForEach(Array(item.choices.keys.sorted()), id: \.self) { key in
-                        VStack {
-                            Text("\(key): \(item.choices[key] ?? "")")
-                                .onTapGesture {
-                                    command = key
-                                    print(command)
-                                }
-                                .font(.subheadline)
-                                .fontWeight(.semibold)
-                                .foregroundColor(Color.OasisColors.white)
-                                .padding(.vertical, 16)
-                                .padding(.horizontal, margin)
-                            Divider()
+        ZStack {
+            //TODO: 스토리 진행 상황별 배경색 변경
+            if showImageOnly {
+                IllustView(imgName)
+                    .zIndex(1)
+            }
+            
+            VStack{
+                ForEach(dataManager.itemData, id: \.id) { item in
+                    HeaderView(Int(item.hp.description) ?? 5)
+                        .foregroundColor(Color.OasisColors.white)
+                        .padding(.bottom, 39)
+                        .padding(.horizontal, margin)
+                    
+                    StoryView(item.content, imgName)
+                    
+                    VStack {
+                        ForEach(Array(item.choices.keys.sorted()), id: \.self) { key in
+                            VStack {
+                                Text("\(key): \(item.choices[key] ?? "")")
+                                    .onTapGesture {
+                                        command = key
+                                        print(command)
+                                    }
+                                    .font(.subheadline)
+                                    .fontWeight(.semibold)
+                                    .foregroundColor(Color.OasisColors.white)
+                                    .padding(.vertical, 16)
+                                    .padding(.horizontal, margin)
+                                Divider()
+                            }
                         }
                     }
                 }
@@ -154,12 +166,81 @@ private extension GameView {
             Image(img)
                 .resizable()
                 .scaledToFit()
+                .onTapGesture {
+                    self.showImageOnly = true
+                }
         }
         .padding(.horizontal, 18)
         .background(
             RoundedRectangle(cornerRadius: radius)
                 .fill(Color.OasisColors.white10))
         .padding(.horizontal, margin)
+    }
+}
+
+private extension GameView {
+    
+    @ViewBuilder
+    func IllustView(_ img: String) -> some View {
+        ZStack {
+            Color.OasisColors.darkGreen.opacity(0.9)
+            
+            VStack(spacing: 44) {
+                Button {
+                    self.showImageOnly = false
+                } label: {
+                    Image(systemName: HeaderItem.xmark.label)
+                        .fontWeight(.bold)
+                        .foregroundColor(Color.OasisColors.white)
+                        .frame(maxWidth: .infinity, alignment: .trailing)
+                }
+                    .padding(.trailing, margin)
+                    .padding(.bottom, 3)
+                
+                Text("일러스트 제목")
+                    .font(.title2)
+                    .fontWeight(.bold)
+                    .foregroundColor(Color.OasisColors.darkGreen)
+                    .padding(.vertical, 10)
+                    .frame(maxWidth: .infinity)
+                    .background(
+                        RoundedRectangle(cornerRadius: 12)
+                            .fill(Color.OasisColors.yellow10)
+                    )
+                    .padding(.horizontal, 10)
+                
+                Image(img)
+                    .resizable()
+                    .scaledToFit()
+                    .overlay(
+                        Rectangle()
+                    .stroke(
+                        Color.OasisColors.yellow,
+                        lineWidth: 8
+                    )
+                    )
+                    .padding(8)
+                
+                Text("일러스트에 손을 가져다대어 그림을 느껴보세요")
+                    .font(.subheadline)
+                    .fontWeight(.semibold)
+                    .foregroundColor(Color.OasisColors.darkGreen)
+                    .padding(6)
+                    .frame(maxWidth: .infinity)
+                    .background(
+                        RoundedRectangle(cornerRadius: 12)
+                            .stroke(Color.OasisColors.yellow40)
+                            .background(
+                                RoundedRectangle(cornerRadius: 12)
+                                    .fill(
+                                Color.OasisColors.yellow
+                                    )
+                            )
+                    )
+                    .padding(.horizontal, margin)
+            }
+        }
+        .ignoresSafeArea()
     }
 }
 
