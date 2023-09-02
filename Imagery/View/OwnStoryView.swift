@@ -22,12 +22,16 @@ struct OwnStoryView: View {
                 .ignoresSafeArea()
             
             VStack(alignment: .leading) {
-                Image(systemName: backButton)
-                    .foregroundColor(Color.OasisColors.white)
-                    .font(.system(size: 24))
-                    .fontWeight(.bold)
-                    .padding(.leading, 8)
-                    .padding(.bottom, 24)
+                Button {
+                    
+                } label: {
+                    Image(systemName: backButton)
+                        .foregroundColor(Color.OasisColors.white)
+                        .font(.system(size: 24))
+                        .fontWeight(.bold)
+                        .padding(.leading, 8)
+                        .padding(.bottom, 24)
+                }
                 
                 Text(title)
                     .font(.system(size: 26))
