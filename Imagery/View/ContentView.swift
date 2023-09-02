@@ -7,14 +7,6 @@
 
 import SwiftUI
 
-enum gameState{
-    case initial
-    case playing
-    case result
-    case history
-}
-
-
 struct ContentView: View {
     @StateObject var gameManager = GameManager.shared
     @State private var isLoading = false

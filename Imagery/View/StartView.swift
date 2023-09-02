@@ -67,8 +67,6 @@ struct StartView: View {
         }
         .padding(margin)
     }
-    
-    
 }
 
 struct PlayButton: View {
@@ -85,6 +83,9 @@ struct PlayButton: View {
             //FIXME: 버튼에 따라 perform 상세 수정
             DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
                 GameManager.shared.gameState = .playing
+                Task {
+                    await DataManager.shared.loadData("")
+                }
             }
         } label: {
             Text(buttonType.label)

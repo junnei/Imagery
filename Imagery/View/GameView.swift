@@ -27,16 +27,68 @@ extension Text {
 
 struct GameView: View {
     @StateObject var dataManager = DataManager.shared
+    @StateObject var gameManager = GameManager.shared
     @State var command = ""
     
     //[TODO]: Add func recognize text
     @State private var hpString: String = ""
+    @State var pressed: Bool = false
     
     var body: some View {
         RoundedRectangle(cornerRadius: 12)
-            .fill(Color.OasisColors.yellow)
+            .fill(gameManager.healthState == .drop ? .red : (gameManager.healthState == .heal ? .blue : Color.OasisColors.yellow))
             .overlay {
                 VStack{
+                    if (dataManager.dataList.count > 0) {
+                        let lastIndex = dataManager.dataList.count - 1
+                        Text("HP : \(dataManager.dataList[lastIndex].hp.description)")
+                        Text(dataManager.dataList[lastIndex].content)
+                        AsyncImage(url: URL(string: dataManager.dataList[lastIndex].dall)) { image in
+                            image.resizable()
+                        } placeholder: {
+                            ProgressView()
+                        }
+                        .frame(width: 300, height: 300)
+                        
+                        HStack {
+                            if let a = dataManager.dataList[lastIndex].choices["a"] {
+                                Button(a) {
+                                    if (dataManager.pressed == false) {
+                                        let _ = print("a")
+                                        dataManager.pressed = true
+                                        Task {
+                                            await dataManager.loadData("a")
+                                        }
+                                    }
+                                }
+                            }
+                            if let b = dataManager.dataList[lastIndex].choices["b"] {
+                                Button(b) {
+                                    if (dataManager.pressed == false) {
+                                        let _ = print("b")
+                                        dataManager.pressed = true
+                                        Task {
+                                            await dataManager.loadData("b")
+                                        }
+                                    }
+                                }
+                            }
+                            
+                            if let c = dataManager.dataList[lastIndex].choices["c"] {
+                                Button(c) {
+                                    if (dataManager.pressed == false) {
+                                        let _ = print("c")
+                                        dataManager.pressed = true
+                                        Task {
+                                            await dataManager.loadData("c")
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                        .background(dataManager.pressed ? .gray : .yellow )
+                    }
+                    /*
                     ForEach(dataManager.itemData, id: \.id) { item in
                         Text("HP : "+item.hp.description)
                             .speakOnTap("HP : "+item.hp.description)
@@ -59,14 +111,11 @@ struct GameView: View {
                         }
                         .foregroundColor(.black)
                     }
-                    .padding()
+                    .padding()*/
                 }
                 .foregroundColor(Color.OasisColors.darkGreen)
             }
             .padding()
-            .onAppear {
-                dataManager.loadData()
-            }
     }
 }
 
