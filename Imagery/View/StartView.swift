@@ -104,6 +104,9 @@ struct PlayButton: View {
     var body: some View {
         Button {
             self.isPressed.toggle()
+            DispatchQueue.main.asyncAfter(deadline: .now()+0.3) {
+                self.isPressed.toggle()
+            }
             //FIXME: 버튼에 따라 perform 상세 수정
             DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
                 switch buttonType {
