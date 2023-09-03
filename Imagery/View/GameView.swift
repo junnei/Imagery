@@ -25,7 +25,9 @@ extension Text {
     }
 }
 
+//TODO: 파일 따로
 enum HeaderItem {
+    case back
     case house
     case photo
     case hp
@@ -35,6 +37,8 @@ enum HeaderItem {
     
     var label: String {
         switch self {
+        case .back:
+            return "chevron.left"
         case .house:
             return "house.fill"
         case .photo:
