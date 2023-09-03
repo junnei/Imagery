@@ -270,8 +270,13 @@ private extension GameView {
                     image.resizable()
                         .scaledToFit()
                 } placeholder: {
-                    ProgressView()
+                    Color.gray
+                        .opacity(0.5)
+                        .overlay {
+                            ProgressView()
+                        }
                 }
+                .frame(width: 300, height: 300)
                 .accessibilityLabel("이미지")
                 .accessibilityIdentifier("Image")
                 .onTapGesture {
@@ -331,8 +336,13 @@ private extension GameView {
                     image.resizable()
                         .scaledToFit()
                 } placeholder: {
-                    ProgressView()
+                    Color.gray
+                        .opacity(0.5)
+                        .overlay {
+                            ProgressView()
+                        }
                 }
+                .frame(width: 374, height: 374)
                 .overlay(
                     Rectangle()
                     .stroke(
@@ -340,7 +350,7 @@ private extension GameView {
                         lineWidth: 8
                     )
                 )
-                .padding(8)
+                .padding(12)
                 .accessibilityLabel("이미지")
                 .accessibilityIdentifier("Image")
                 

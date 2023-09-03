@@ -20,19 +20,23 @@ struct AlbumGrid: View {
             LazyVGrid(columns: columns, spacing: 32) {
                 ForEach(0..<DataManager.shared.dataList.count) { index in
                     VStack(spacing: 8) {
-                        
                         AsyncImage(url: URL(string: DataManager.shared.dataList[index].dall)) { image in
                             image.resizable()
                                 .scaledToFit()
                                 .cornerRadius(12)
-                                .padding(.horizontal, 16)
                                 .onTapGesture {
                                     self.showIllustPopup = true
-                                    self.selectedImg = imgName
+                                    self.selectedImg = DataManager.shared.dataList[index].dall
                                 }
                         } placeholder: {
-                            ProgressView()
+                            RoundedRectangle(cornerRadius: 12)
+                                .fill(Color.gray.opacity(0.5))
+                                .overlay {
+                                    ProgressView()
+                                }
                         }
+                        .frame(width: 150, height: 150)
+                        
                         Text(String(index))
                             .font(.subheadline)
                             .fontWeight(.semibold)
