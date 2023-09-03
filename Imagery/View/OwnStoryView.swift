@@ -8,7 +8,6 @@
 import SwiftUI
 
 struct OwnStoryView: View {
-    let backButton = "chevron.left"
     let title = "만들고 싶은 이야기를\n적어주세요"
     
     let margin = 20.0
@@ -25,7 +24,7 @@ struct OwnStoryView: View {
                 Button {
                     
                 } label: {
-                    Image(systemName: backButton)
+                    Image(systemName: HeaderItem.back.label)
                         .foregroundColor(Color.OasisColors.white)
                         .font(.system(size: 24))
                         .fontWeight(.bold)

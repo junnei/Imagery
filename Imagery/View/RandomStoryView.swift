@@ -8,8 +8,6 @@
 import SwiftUI
 
 struct RandomStoryView: View {
-    let backButton = "chevron.left"
-    
     let margin = 20.0
     
     @State private var isPressed = false
@@ -24,7 +22,7 @@ struct RandomStoryView: View {
                 Button {
                     
                 } label: {
-                    Image(systemName: backButton)
+                    Image(systemName: HeaderItem.back.label)
                         .foregroundColor(Color.OasisColors.white)
                         .font(.system(size: 24))
                         .fontWeight(.bold)
