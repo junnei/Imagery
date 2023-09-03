@@ -38,7 +38,7 @@ struct AlbumGrid: View {
                         .frame(width: 150, height: 150)
                         
                         Text(String(index))
-                            .font(.subheadline)
+                            .font(.headline)
                             .fontWeight(.semibold)
                             .foregroundColor(Color.OasisColors.white)
                     }

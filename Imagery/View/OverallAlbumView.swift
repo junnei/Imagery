@@ -138,7 +138,7 @@ private extension OverallAlbumView {
                 .padding(.horizontal, 16)
                 
                 Text("일러스트에 손을 가져다대어 그림을 느껴보세요")
-                    .font(.subheadline)
+                    .font(.headline)
                     .fontWeight(.semibold)
                     .foregroundColor(Color.OasisColors.darkGreen)
                     .padding(6)

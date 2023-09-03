@@ -131,7 +131,7 @@ struct GameView: View {
                                     .accessibilityIdentifier("choice1")
                                 }
                                 Divider()
-                                    .overlay(Color.OasisColors.white)
+                                    .overlay(Color.OasisColors.white20)
                             }
                             .background(dataManager.pressed ? setOptionBackground("a") : .clear)
                             
@@ -158,7 +158,7 @@ struct GameView: View {
                                 }
                                 
                                 Divider()
-                                    .overlay(Color.OasisColors.white)
+                                    .overlay(Color.OasisColors.white20)
                             }
                             .background(dataManager.pressed ? setOptionBackground("b") : .clear)
                             
@@ -184,11 +184,11 @@ struct GameView: View {
                                     .accessibilityIdentifier("choice3")
                                 }
                                 Divider()
-                                    .overlay(Color.OasisColors.white)
+                                    .overlay(Color.OasisColors.white20)
                             }
                             .background(dataManager.pressed ? setOptionBackground("c") : .clear)
                         }
-                        .font(.subheadline)
+                        .font(.headline)
                         .fontWeight(.semibold)
                         .padding(.bottom, 59)
                     }
@@ -291,6 +291,7 @@ private extension GameView {
             HStack {
                 Text(content)
                     .font(.headline)
+                    .lineSpacing(30)
                     .foregroundColor(Color.OasisColors.white)
                 Spacer()
             }
@@ -347,19 +348,11 @@ private extension GameView {
                         }
                 }
                 .frame(width: 374, height: 374)
-                .overlay(
-                    Rectangle()
-                    .stroke(
-                        Color.OasisColors.yellow,
-                        lineWidth: 8
-                    )
-                )
-                .padding(12)
                 .accessibilityLabel("이미지")
                 .accessibilityIdentifier("Image")
                 
                 Text("일러스트에 손을 가져다대어 그림을 느껴보세요")
-                    .font(.subheadline)
+                    .font(.headline)
                     .fontWeight(.semibold)
                     .foregroundColor(Color.OasisColors.darkGreen)
                     .padding(6)
