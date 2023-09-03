@@ -130,7 +130,7 @@ struct GameView: View {
                                     .accessibilityIdentifier("choice1")
                                 }
                                 Divider()
-                                    .overlay(Color.OasisColors.white)
+                                    .overlay(Color.OasisColors.white20)
                             }
                             .background(setOptionBackground("a"))
                             
@@ -157,7 +157,7 @@ struct GameView: View {
                                 }
                                 
                                 Divider()
-                                    .overlay(Color.OasisColors.white)
+                                    .overlay(Color.OasisColors.white20)
                             }
                             .background(setOptionBackground("b"))
                             
@@ -183,11 +183,11 @@ struct GameView: View {
                                     .accessibilityIdentifier("choice3")
                                 }
                                 Divider()
-                                    .overlay(Color.OasisColors.white)
+                                    .overlay(Color.OasisColors.white20)
                             }
                             .background(setOptionBackground("c"))
                         }
-                        .font(.subheadline)
+                        .font(.headline)
                         .fontWeight(.semibold)
                         .padding(.bottom, 59)
                     }
@@ -281,6 +281,7 @@ private extension GameView {
             HStack {
                 Text(content)
                     .font(.headline)
+                    .lineSpacing(30)
                     .foregroundColor(Color.OasisColors.white)
                 Spacer()
             }
@@ -331,6 +332,7 @@ private extension GameView {
                 } placeholder: {
                     ProgressView()
                 }
+<<<<<<< Updated upstream
                 .overlay(
                     Rectangle()
                     .stroke(
@@ -339,11 +341,15 @@ private extension GameView {
                     )
                 )
                 .padding(8)
+=======
+                .frame(width: 374, height: 374)
+                .padding(12)
+>>>>>>> Stashed changes
                 .accessibilityLabel("이미지")
                 .accessibilityIdentifier("Image")
                 
                 Text("일러스트에 손을 가져다대어 그림을 느껴보세요")
-                    .font(.subheadline)
+                    .font(.headline)
                     .fontWeight(.semibold)
                     .foregroundColor(Color.OasisColors.darkGreen)
                     .padding(6)

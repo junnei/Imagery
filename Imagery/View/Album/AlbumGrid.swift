@@ -34,7 +34,7 @@ struct AlbumGrid: View {
                             ProgressView()
                         }
                         Text(String(index))
-                            .font(.subheadline)
+                            .font(.headline)
                             .fontWeight(.semibold)
                             .foregroundColor(Color.OasisColors.white)
                     }
