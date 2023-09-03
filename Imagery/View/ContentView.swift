@@ -17,8 +17,12 @@ struct ContentView: View {
             switch gameManager.gameState {
             case .initial:
                 StartView()
-            case .playing, .result, .history:
+            case .ownStory:
+                OwnStoryView()
+            case .playing, .result:
                 GameView()
+            case .storyHistory, .illustCollection:
+                EmptyView()
             }
         }
     }

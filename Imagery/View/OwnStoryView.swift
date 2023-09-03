@@ -22,7 +22,7 @@ struct OwnStoryView: View {
             
             VStack(alignment: .leading) {
                 Button {
-                    
+                    GameManager.shared.gameState = .initial
                 } label: {
                     Image(systemName: HeaderItem.back.label)
                         .foregroundColor(Color.OasisColors.white)
@@ -118,7 +118,11 @@ private extension OwnStoryView {
     @ViewBuilder
     func NextButton() -> some View {
         Button {
-            
+            DataManager.shared.isLoading = true
+            GameManager.shared.gameState = .playing
+            Task {
+                await DataManager.shared.loadData(text)
+            }
         } label: {
             Text("다음")
                 .font(.title3)

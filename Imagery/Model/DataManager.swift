@@ -13,14 +13,32 @@ class DataManager : ObservableObject {
     
     @Published var dataList = [Data]()
     @Published var pressed: Bool = false
+    @Published var isLoading: Bool = false
+    
+    
+    func resetData() {
+        if let url = URL(string: "http://15.164.95.147:5000/api/reset") {
+            URLSession.shared.dataTask(with: url) { data, response, error in
+                guard error == nil else {
+                    print(error!.localizedDescription)
+                    return
+                }
+            }
+        }
+    }
     
     func loadData(_ command: String) async {
-        /* http://15.164.95.147:5000/hello */
+        /* http://15.164.95.147:5000/api/play */
         var url = URL(string: "http://127.0.0.1:5000/api/play")
         
         if (command != "") {
-            let command_query = URLQueryItem(name: "command", value: "a")
-            url!.append(queryItems: [command_query])
+            if (command == "a" || command == "b" || command == "c") {
+                let command_query = URLQueryItem(name: "command", value: command)
+                url!.append(queryItems: [command_query])
+            } else {
+                let command_query = URLQueryItem(name: "ownStory", value: command)
+                url!.append(queryItems: [command_query])
+            }
         }
         
         var requestURL = URLRequest(url: url!)
@@ -61,6 +79,7 @@ class DataManager : ObservableObject {
                         }
                         self.dataList.append(userResponse!)
                         self.pressed = false
+                        self.isLoading = false
                         print(userResponse?.content)
                         print(userResponse?.dall)
                         print(userResponse?.hp.description)
@@ -68,6 +87,7 @@ class DataManager : ObservableObject {
                         print(userResponse?.choices["a"])
                         print(userResponse?.choices["b"])
                         print(userResponse?.choices["c"])
+                        
                     }
                     /*
                     DispatchQueue.main.async {

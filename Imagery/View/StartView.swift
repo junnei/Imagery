@@ -43,22 +43,41 @@ struct StartView: View {
             Image(appLogo)
                 .resizable()
                 .scaledToFit()
+                .accessibilityLabel("appLogo Imagery")
+                .accessibilityIdentifier("appLogo")
+                .onTapGesture {
+                    DataManager.shared.resetData()
+                }
             
             //FIXME: enum으로 처리
             if isFirstPlay {
                 VStack(spacing: gap) {
                     PlayButton(buttonType: .ownStory)
+                        .accessibilityLabel(ButtonType.ownStory.label)
+                        .accessibilityIdentifier("ownStory")
                     PlayButton(buttonType: .randomStory)
+                        .accessibilityLabel(ButtonType.randomStory.label)
+                        .accessibilityIdentifier("randomStory")
                 }
                 .padding(.top, 83)
             } else {
                 VStack(spacing: gap) {
                     PlayButton(buttonType: .recentStory)
+                        .accessibilityLabel(ButtonType.recentStory.label)
+                        .accessibilityIdentifier("recentStory")
                     PlayButton(buttonType: .ownStory)
+                        .accessibilityLabel(ButtonType.ownStory.label)
+                        .accessibilityIdentifier("ownStory")
                     PlayButton(buttonType: .randomStory)
+                        .accessibilityLabel(ButtonType.randomStory.label)
+                        .accessibilityIdentifier("randomStory")
                     HStack(spacing: gap) {
                         PlayButton(buttonType: .storyHistory)
+                            .accessibilityLabel(ButtonType.storyHistory.label)
+                            .accessibilityIdentifier("storyHistory")
                         PlayButton(buttonType: .illustCollection)
+                            .accessibilityLabel(ButtonType.illustCollection.label)
+                            .accessibilityIdentifier("illustCollection")
                     }
                 }
                 .padding(.top, 53)
@@ -82,9 +101,19 @@ struct PlayButton: View {
             self.isPressed.toggle()
             //FIXME: 버튼에 따라 perform 상세 수정
             DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
-                GameManager.shared.gameState = .playing
-                Task {
-                    await DataManager.shared.loadData("")
+                switch buttonType {
+                case .recentStory, .randomStory :
+                    DataManager.shared.isLoading = true
+                    GameManager.shared.gameState = .playing
+                    Task {
+                        await DataManager.shared.loadData("")
+                    }
+                case .ownStory :
+                    GameManager.shared.gameState = .ownStory
+                case .storyHistory :
+                    GameManager.shared.gameState = .storyHistory
+                case .illustCollection :
+                    GameManager.shared.gameState = .illustCollection
                 }
             }
         } label: {

@@ -6,24 +6,7 @@
 //
 
 import SwiftUI
-import AVFoundation
 import Combine
-
-extension Text {
-    func speakText(_ text: String) {
-        let utterance = AVSpeechUtterance(string: text)
-        utterance.voice = AVSpeechSynthesisVoice(language: "ko-KR") // 한국어 음성으로 설정
-        utterance.rate = 0.5 // 음성 속도 조절 (1.0이 기본값)
-        utterance.pitchMultiplier = 1.0 // 음성 높낮이 조절 (1.0이 기본값)
-        GameManager.shared.speechSynthesizer.speak(utterance)
-    }
-    
-    func speakOnTap(_ text: String) -> some View {
-        return self.onTapGesture {
-            speakText(text)
-        }
-    }
-}
 
 //TODO: 파일 따로
 enum HeaderItem {
@@ -58,11 +41,8 @@ enum HeaderItem {
 struct GameView: View {
     @StateObject var dataManager = DataManager.shared
     @StateObject var gameManager = GameManager.shared
-    @State var command = ""
     
     //[TODO]: Add func recognize text
-    @State private var hpString: String = ""
-    @State private var imgName = "DALL-E"
     @State private var showImageOnly = false
     
     let margin = 20.0
@@ -72,62 +52,77 @@ struct GameView: View {
         ZStack {
             //TODO: 스토리 진행 상황별 배경색 변경
             if showImageOnly {
-                IllustView(imgName)
+                IllustView(dataManager.dataList.last!.dall)
                     .zIndex(1)
             }
             
             VStack{
-                let lastIndex = dataManager.dataList.count - 1
-                if (lastIndex > 0) {
-                    HeaderView(Int(dataManager.dataList[lastIndex].hp) ?? 5)
-                        .foregroundColor(Color.OasisColors.white)
-                        .padding(.bottom, 39)
-                        .padding(.horizontal, margin)
-                    
-                    StoryView(dataManager.dataList[lastIndex].content, imgName)
-                    
-                    VStack {
+                if dataManager.isLoading {
+                    ProgressView()
+                }
+                else {
+                    let lastIndex = dataManager.dataList.count - 1
+                    if (lastIndex >= 0) {
+                        HeaderView(Int(dataManager.dataList[lastIndex].hp))
+                            .foregroundColor(Color.OasisColors.white)
+                            .padding(.bottom, 39)
+                            .padding(.horizontal, margin)
+                            .accessibilityLabel("체력 : \(dataManager.dataList[lastIndex].hp.description)")
+                            .accessibilityIdentifier("HP")
+                        
+                        StoryView(dataManager.dataList[lastIndex].content, dataManager.dataList[lastIndex].dall)
+                            .accessibilityLabel("\(dataManager.dataList[lastIndex].content)")
+                            .accessibilityIdentifier("content")
+                        
                         VStack {
-                            if let a = dataManager.dataList[lastIndex].choices["a"] {
-                                Button(a) {
-                                    if (dataManager.pressed == false) {
-                                        dataManager.pressed = true
-                                        Task {
-                                            await dataManager.loadData("a")
+                            VStack {
+                                if let a = dataManager.dataList[lastIndex].choices["a"] {
+                                    Button(a) {
+                                        if (dataManager.pressed == false) {
+                                            dataManager.pressed = true
+                                            Task {
+                                                await dataManager.loadData("a")
+                                            }
                                         }
                                     }
+                                    .accessibilityLabel(a)
+                                    .accessibilityIdentifier("choice1")
                                 }
-                            }
-                            Divider()
-                            if let b = dataManager.dataList[lastIndex].choices["b"] {
-                                Button(b) {
-                                    if (dataManager.pressed == false) {
-                                        dataManager.pressed = true
-                                        Task {
-                                            await dataManager.loadData("b")
+                                Divider()
+                                if let b = dataManager.dataList[lastIndex].choices["b"] {
+                                    Button(b) {
+                                        if (dataManager.pressed == false) {
+                                            dataManager.pressed = true
+                                            Task {
+                                                await dataManager.loadData("b")
+                                            }
                                         }
                                     }
+                                    .accessibilityLabel(b)
+                                    .accessibilityIdentifier("choice2")
                                 }
-                            }
-                            
-                            Divider()
-                            if let c = dataManager.dataList[lastIndex].choices["c"] {
-                                Button(c) {
-                                    if (dataManager.pressed == false) {
-                                        dataManager.pressed = true
-                                        Task {
-                                            await dataManager.loadData("c")
+                                
+                                Divider()
+                                if let c = dataManager.dataList[lastIndex].choices["c"] {
+                                    Button(c) {
+                                        if (dataManager.pressed == false) {
+                                            dataManager.pressed = true
+                                            Task {
+                                                await dataManager.loadData("c")
+                                            }
                                         }
                                     }
+                                    .accessibilityLabel(c)
+                                    .accessibilityIdentifier("choice3")
                                 }
+                                Divider()
                             }
-                            Divider()
+                            .font(.subheadline)
+                            .fontWeight(.semibold)
+                            .foregroundColor(Color.OasisColors.white)
+                            .padding(.vertical, 16)
+                            .padding(.horizontal, margin)
                         }
-                        .font(.subheadline)
-                        .fontWeight(.semibold)
-                        .foregroundColor(Color.OasisColors.white)
-                        .padding(.vertical, 16)
-                        .padding(.horizontal, margin)
                     }
                 }
             }
@@ -137,10 +132,10 @@ struct GameView: View {
     func setHP(_ hp: Int) -> String {
         var hpStatus = ""
         
-        for _ in 1...hp {
+        for _ in 0..<hp {
             hpStatus += HeaderItem.heartFill.label
         }
-        for _ in (hp + 1)...5 {
+        for _ in hp..<5 {
             hpStatus += HeaderItem.heart.label
         }
         
@@ -163,7 +158,6 @@ private extension GameView {
             
             Text("HP \(setHP(hp))")
             .font(.callout)
-            .speakOnTap("HP: \(String(hp))")
             .fixedSize()
             .padding(.vertical, 4)
             .padding(.horizontal, 18)
@@ -186,20 +180,25 @@ private extension GameView {
 private extension GameView {
     
     @ViewBuilder
-    func StoryView(_ content: String, _ img: String) -> some View {
+    func StoryView(_ content: String, _ imgURL: String) -> some View {
         ScrollView {
             Text(content)
-                .speakOnTap(content)
                 .font(.headline)
                 .foregroundColor(Color.OasisColors.white)
                 .frame(maxWidth: .infinity, alignment: .leadingFirstTextBaseline)
             
-            Image(img)
-                .resizable()
-                .scaledToFit()
-                .onTapGesture {
-                    self.showImageOnly = true
-                }
+            
+            AsyncImage(url: URL(string: imgURL)) { image in
+                image.resizable()
+                    .scaledToFit()
+            } placeholder: {
+                ProgressView()
+            }
+            .accessibilityLabel("이미지")
+            .accessibilityIdentifier("Image")
+            .onTapGesture {
+                self.showImageOnly = true
+            }
         }
         .padding(.horizontal, 18)
         .background(
@@ -212,7 +211,7 @@ private extension GameView {
 private extension GameView {
     
     @ViewBuilder
-    func IllustView(_ img: String) -> some View {
+    func IllustView(_ imgURL: String) -> some View {
         ZStack {
             Color.OasisColors.darkGreen.opacity(0.9)
             
@@ -240,17 +239,22 @@ private extension GameView {
                     )
                     .padding(.horizontal, 10)
                 
-                Image(img)
-                    .resizable()
-                    .scaledToFit()
-                    .overlay(
-                        Rectangle()
+                AsyncImage(url: URL(string: imgURL)) { image in
+                    image.resizable()
+                        .scaledToFit()
+                } placeholder: {
+                    ProgressView()
+                }
+                .overlay(
+                    Rectangle()
                     .stroke(
                         Color.OasisColors.yellow,
                         lineWidth: 8
                     )
-                    )
-                    .padding(8)
+                )
+                .padding(8)
+                .accessibilityLabel("이미지")
+                .accessibilityIdentifier("Image")
                 
                 Text("일러스트에 손을 가져다대어 그림을 느껴보세요")
                     .font(.subheadline)
