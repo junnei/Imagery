@@ -44,6 +44,7 @@ struct GameView: View {
     
     //[TODO]: Add func recognize text
     @State private var showImageOnly = false
+    @State private var selectedKey = ""
     
     let margin = 20.0
     let radius = 8.0
@@ -105,55 +106,82 @@ struct GameView: View {
                             .accessibilityLabel("\(dataManager.dataList[lastIndex].content)")
                             .accessibilityIdentifier("content")
                         
-                        VStack {
+                        VStack(spacing: 0) {
                             VStack {
                                 if let a = dataManager.dataList[lastIndex].choices["a"] {
-                                    Button(a) {
+                                    Button {
                                         if (dataManager.pressed == false) {
                                             dataManager.pressed = true
                                             Task {
                                                 await dataManager.loadData("a")
                                             }
                                         }
+                                        selectedKey = "a"
+                                    } label: {
+                                        Text(a)
+                                            .foregroundColor(setOptionTextColor("a"))
+                                            .padding(.vertical, 16)
+                                            .padding(.top, 4)
+                                            .padding(.horizontal, margin)
                                     }
                                     .accessibilityLabel(a)
                                     .accessibilityIdentifier("choice1")
                                 }
                                 Divider()
+                            }
+                            .background(setOptionBackground("a"))
+                            
+                            VStack {
                                 if let b = dataManager.dataList[lastIndex].choices["b"] {
-                                    Button(b) {
+                                    Button {
                                         if (dataManager.pressed == false) {
                                             dataManager.pressed = true
                                             Task {
                                                 await dataManager.loadData("b")
                                             }
                                         }
+                                        selectedKey = "b"
+                                    } label: {
+                                        Text(b)
+                                            .foregroundColor(setOptionTextColor("b"))
+                                            .padding(.vertical, 16)
+                                            .padding(.top, 4)
+                                            .padding(.horizontal, margin)
                                     }
                                     .accessibilityLabel(b)
                                     .accessibilityIdentifier("choice2")
                                 }
                                 
                                 Divider()
+                            }
+                            .background(setOptionBackground("b"))
+                            
+                            VStack {
                                 if let c = dataManager.dataList[lastIndex].choices["c"] {
-                                    Button(c) {
+                                    Button {
                                         if (dataManager.pressed == false) {
                                             dataManager.pressed = true
                                             Task {
                                                 await dataManager.loadData("c")
                                             }
                                         }
+                                        selectedKey = "c"
+                                    } label: {
+                                        Text(c)
+                                            .foregroundColor(setOptionTextColor("c"))
+                                            .padding(.vertical, 16)
+                                            .padding(.top, 4)
+                                            .padding(.horizontal, margin)
                                     }
                                     .accessibilityLabel(c)
                                     .accessibilityIdentifier("choice3")
                                 }
                                 Divider()
                             }
-                            .font(.subheadline)
-                            .fontWeight(.semibold)
-                            .foregroundColor(Color.OasisColors.white)
-                            .padding(.vertical, 16)
-                            .padding(.horizontal, margin)
+                            .background(setOptionBackground("c"))
                         }
+                        .font(.subheadline)
+                        .fontWeight(.semibold)
                     }
                 }
             }
@@ -172,6 +200,22 @@ struct GameView: View {
         
         return hpStatus
     }
+    
+    func setOptionTextColor(_ key: String) -> Color {
+         if key == selectedKey {
+             return Color.OasisColors.darkGreen
+         } else {
+             return Color.OasisColors.white
+         }
+     }
+
+     func setOptionBackground(_ key: String) -> Color {
+         if key == selectedKey {
+             return Color.OasisColors.yellow
+         } else {
+             return Color.clear
+         }
+     }
 }
 
 
@@ -213,14 +257,6 @@ private extension GameView {
     @ViewBuilder
     func StoryView(_ content: String, _ imgURL: String) -> some View {
         ScrollView {
-            HStack {
-                Text(content)
-                    .font(.headline)
-                    .foregroundColor(Color.OasisColors.white)
-                Spacer()
-            }
-                //.frame(maxWidth: .infinity, alignment: .leadingFirstTextBaseline)
-            
             if imgURL != "" {
                 AsyncImage(url: URL(string: imgURL)) { image in
                     image.resizable()
@@ -234,6 +270,14 @@ private extension GameView {
                     self.showImageOnly = true
                 }
             }
+            
+            HStack {
+                Text(content)
+                    .font(.headline)
+                    .foregroundColor(Color.OasisColors.white)
+                Spacer()
+            }
+                //.frame(maxWidth: .infinity, alignment: .leadingFirstTextBaseline)
         }
         .padding(18)
         .background(
