@@ -66,6 +66,7 @@ struct GameView: View {
                         HeaderView(5)
                             .foregroundColor(Color.OasisColors.white)
                             .padding(.bottom, 36)
+                            .padding(.top, 61)
                             .padding(.horizontal, margin)
                     }
                     else {
@@ -81,6 +82,7 @@ struct GameView: View {
                         }
                         .accessibilityLabel("로딩 중 입니다")
                         .accessibilityIdentifier("content")
+                        .padding(.bottom, 59)
                     /*
                     VStack {
                         Button("") {
@@ -101,6 +103,7 @@ struct GameView: View {
                         HeaderView(Int(dataManager.dataList[lastIndex].hp))
                             .foregroundColor(Color.OasisColors.white)
                             .padding(.bottom, 36)
+                            .padding(.top, 61)
                             .padding(.horizontal, margin)
                         
                         StoryView(dataManager.dataList[lastIndex].content, dataManager.dataList[lastIndex].dall)
@@ -195,6 +198,7 @@ struct GameView: View {
                 }
             }
         }
+        .ignoresSafeArea()
     }
     func setHP(_ hp: Int) -> String {
         var hpStatus = ""
@@ -286,13 +290,15 @@ private extension GameView {
                 .onTapGesture {
                     self.showImageOnly = true
                 }
+                .padding(.bottom, 12)
             }
             
             HStack {
                 Text(content)
                     .font(.headline)
-                    .lineSpacing(30)
+                    .lineSpacing(14)
                     .foregroundColor(Color.OasisColors.white)
+                    .multilineTextAlignment(.leading)
                 Spacer()
             }
                 //.frame(maxWidth: .infinity, alignment: .leadingFirstTextBaseline)

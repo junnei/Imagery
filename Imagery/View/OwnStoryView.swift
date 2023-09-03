@@ -115,7 +115,7 @@ private extension OwnStoryView {
             
             TextEditor(text: $text)
                 .font(.headline)
-                .lineSpacing(30)
+                .lineSpacing(14)
                 .padding(18)
                 .frame(maxHeight: .infinity)
                 .scrollContentBackground(.hidden)
