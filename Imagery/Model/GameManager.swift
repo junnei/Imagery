@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import SwiftUI
 
 enum gameState{
     case initial
@@ -31,4 +32,5 @@ class GameManager : ObservableObject {
     
     @Published var gameState: gameState = .initial
     @Published var healthState: healthState = .normal
+    @Published var background: Color = Color.OasisColors.darkGreen
 }

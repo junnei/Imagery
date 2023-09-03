@@ -6,9 +6,10 @@
 //
 
 import Foundation
+import SwiftUI
 
 /* http://15.164.95.147:5000/api/play */
-let baseURL = "http://127.0.0.1:5000/"
+let baseURL = "http://15.164.95.147:5000/"
 
 class DataManager : ObservableObject {
     static let shared = DataManager()
@@ -52,6 +53,30 @@ class DataManager : ObservableObject {
                 }
             }.resume()
         }
+    }
+    
+    func loadSpeech(_ command: String) async {
+        var url = URL(string: baseURL + "api/whisper")
+        
+        
+        var requestURL = URLRequest(url: url!)
+        requestURL.httpMethod = "POST"
+        requestURL.setValue("application/json", forHTTPHeaderField: "Content-Type")
+        
+        URLSession.shared.dataTask(with: requestURL) { data, response, error in
+            guard error == nil else {
+                print(error!.localizedDescription)
+                return
+            }
+            if let data = data, let response = response as? HTTPURLResponse, response.statusCode == 200 {
+                do {
+                    let userResponse = try? JSONDecoder().decode(String.self, from: data)
+                    DispatchQueue.main.async {
+                        self.subjectList.append(userResponse!)
+                    }
+                }
+            }
+        }.resume()
     }
     
     func loadSummary(_ command: String) async {
@@ -114,6 +139,12 @@ class DataManager : ObservableObject {
                         else {
                             if (self.dataList.last!.state == "fail") {
                                 GameManager.shared.healthState = .fail
+                                GameManager.shared.background = Color.OasisColors.badEnding
+                                DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
+                                    withAnimation(.easeOut(duration: 0.5)) {
+                                        GameManager.shared.background = Color.OasisColors.darkGreen
+                                    }
+                                }
                             }
                             else if (self.dataList.last!.state == "success") {
                                 GameManager.shared.healthState = .success
@@ -124,12 +155,26 @@ class DataManager : ObservableObject {
                                 }
                                 else if (userResponse!.hp < self.dataList.last!.hp) {
                                     GameManager.shared.healthState = .drop
+                                    GameManager.shared.background = Color.OasisColors.error
+                                    DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
+                                        withAnimation(.easeOut(duration: 0.5)) {
+                                            GameManager.shared.background = Color.OasisColors.darkGreen
+                                        }
+                                    }
                                 }
                                 else {
                                     GameManager.shared.healthState = .heal
+                                    GameManager.shared.background = Color.OasisColors.success
+                                    DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
+                                        withAnimation(.easeOut(duration: 0.5)) {
+                                            GameManager.shared.background = Color.OasisColors.darkGreen
+                                        }
+                                    }
                                 }
                             }
                         }
+                        
+                        
                         self.dataList.append(userResponse!)
                         self.pressed = false
                         self.isLoading = false
