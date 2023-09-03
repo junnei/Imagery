@@ -123,6 +123,7 @@ struct GameView: View {
                                             .padding(.vertical, 16)
                                             .padding(.top, 4)
                                             .padding(.horizontal, margin)
+                                            .frame(maxWidth: .infinity, alignment: .leading)
                                     }
                                     .accessibilityLabel(a)
                                     .accessibilityIdentifier("choice1")
@@ -147,6 +148,7 @@ struct GameView: View {
                                             .padding(.vertical, 16)
                                             .padding(.top, 4)
                                             .padding(.horizontal, margin)
+                                            .frame(maxWidth: .infinity, alignment: .leading)
                                     }
                                     .accessibilityLabel(b)
                                     .accessibilityIdentifier("choice2")
@@ -172,6 +174,7 @@ struct GameView: View {
                                             .padding(.vertical, 16)
                                             .padding(.top, 4)
                                             .padding(.horizontal, margin)
+                                            .frame(maxWidth: .infinity, alignment: .leading)
                                     }
                                     .accessibilityLabel(c)
                                     .accessibilityIdentifier("choice3")
