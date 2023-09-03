@@ -19,9 +19,12 @@ struct InAlbumView: View {
         ZStack {
             Color.OasisColors.darkGreen
                 .ignoresSafeArea()
+            
             VStack {
                 HeaderView()
+                    .padding(.top, 54)
                     .padding(.bottom, 36)
+                
                 AlbumGrid(showIllustPopup: $showIllustPopup, selectedImg: $imgName)
                 Spacer()
             }
@@ -32,6 +35,7 @@ struct InAlbumView: View {
                 }
             }
         }
+        .ignoresSafeArea()
     }
 }
 
@@ -39,18 +43,20 @@ private extension InAlbumView {
     
     @ViewBuilder
     func HeaderView() -> some View {
-        HStack {
+        ZStack {
             Button {
                 
             } label: {
                 Image(systemName: HeaderItem.back.label)
-                    
-                Text(title)
-                    .frame(maxWidth: .infinity, alignment: .center)
             }
+            .frame(maxWidth: .infinity, alignment: .leading)
+            
+            Text(title)
+                .frame(maxWidth: .infinity, alignment: .center)
         }
         .fontWeight(.semibold)
         .foregroundColor(Color.OasisColors.white)
+        .padding(.horizontal, 16)
     }
 }
 
@@ -62,6 +68,8 @@ private extension InAlbumView {
             Color.OasisColors.darkGreen.opacity(0.9)
             
             VStack(spacing: 44) {
+                Spacer()
+                
                 Button {
                     self.showIllustPopup = false
                 } label: {
@@ -114,6 +122,9 @@ private extension InAlbumView {
                             )
                     )
                     .padding(.horizontal, margin)
+                
+                Spacer()
+                Spacer()
             }
         }
         .ignoresSafeArea()
