@@ -6,12 +6,27 @@
 //
 
 import SwiftUI
+import AVFoundation
 
 struct OwnStoryView: View {
+    /*
+    // Create an audio session
+    let session = AVAudioSession.sharedInstance()
+
+    // Set the audio session category and mode
+    try session.setCategory(.playAndRecord, mode: .default)
+
+    // Activate the audio session
+    try session.setActive(true)
+
+    // Create an audio recorder
+    let recorder = try AVAudioRecorder(url: URL(string: "./recording.wav")!, settings: [:])
+    */
     let title = "만들고 싶은 이야기를\n적어주세요"
     
     let margin = 20.0
     let radius = 8.0
+    var isRecording: Bool = false
     
     @State private var text = ""
     
@@ -40,7 +55,13 @@ struct OwnStoryView: View {
                     .padding(.bottom, 36)
                 
                 StoryInputView()
-                
+                Button("Record") {/*
+                    if isRecording == false {
+                        recorder.record()
+                    } else {
+                        recorder.stop()
+                    }*/
+                }
                 NextButton()
             }
         }

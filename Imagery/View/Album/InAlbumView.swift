@@ -80,7 +80,7 @@ private extension InAlbumView {
                 }
                     .padding(.trailing, margin)
                     .padding(.bottom, 3)
-                
+                /*
                 Text("일러스트 제목")
                     .font(.title2)
                     .fontWeight(.bold)
@@ -92,7 +92,7 @@ private extension InAlbumView {
                             .fill(Color.OasisColors.yellow10)
                     )
                     .padding(.horizontal, 10)
-                
+                */
                 Image(img)
                     .resizable()
                     .scaledToFit()

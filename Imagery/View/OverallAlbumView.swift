@@ -121,9 +121,10 @@ private extension OverallAlbumView {
                 Spacer()
                 
                 ZStack {
+                    /*
                     Text("일러스트 제목")
                         .frame(maxWidth: .infinity, alignment: .center)
-                    
+                    */
                     Button {
                         self.showIllustPopup = false
                     } label: {
