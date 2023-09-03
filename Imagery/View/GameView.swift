@@ -62,13 +62,13 @@ struct GameView: View {
                     if dataManager.dataList.isEmpty {
                         HeaderView(5)
                             .foregroundColor(Color.OasisColors.white)
-                            .padding(.bottom, 39)
+                            .padding(.bottom, 36)
                             .padding(.horizontal, margin)
                     }
                     else {
                         HeaderView(Int(dataManager.dataList.last!.hp))
                             .foregroundColor(Color.OasisColors.white)
-                            .padding(.bottom, 39)
+                            .padding(.bottom, 36)
                             .padding(.horizontal, margin)
                     }
                     
@@ -97,7 +97,7 @@ struct GameView: View {
                     if (lastIndex >= 0) {
                         HeaderView(Int(dataManager.dataList[lastIndex].hp))
                             .foregroundColor(Color.OasisColors.white)
-                            .padding(.bottom, 39)
+                            .padding(.bottom, 36)
                             .padding(.horizontal, margin)
                             .accessibilityLabel("체력 : \(dataManager.dataList[lastIndex].hp.description)")
                             .accessibilityIdentifier("HP")
@@ -105,6 +105,7 @@ struct GameView: View {
                         StoryView(dataManager.dataList[lastIndex].content, dataManager.dataList[lastIndex].dall)
                             .accessibilityLabel("\(dataManager.dataList[lastIndex].content)")
                             .accessibilityIdentifier("content")
+                            .padding(.bottom, 34)
                         
                         VStack(spacing: 0) {
                             VStack {
@@ -129,6 +130,7 @@ struct GameView: View {
                                     .accessibilityIdentifier("choice1")
                                 }
                                 Divider()
+                                    .overlay(Color.OasisColors.white)
                             }
                             .background(setOptionBackground("a"))
                             
@@ -155,6 +157,7 @@ struct GameView: View {
                                 }
                                 
                                 Divider()
+                                    .overlay(Color.OasisColors.white)
                             }
                             .background(setOptionBackground("b"))
                             
@@ -180,15 +183,16 @@ struct GameView: View {
                                     .accessibilityIdentifier("choice3")
                                 }
                                 Divider()
+                                    .overlay(Color.OasisColors.white)
                             }
                             .background(setOptionBackground("c"))
                         }
                         .font(.subheadline)
                         .fontWeight(.semibold)
+                        .padding(.bottom, 59)
                     }
                 }
             }
-            .padding()
         }
     }
     func setHP(_ hp: Int) -> String {
