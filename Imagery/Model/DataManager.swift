@@ -10,16 +10,17 @@ import SwiftUI
 
 /* http://15.164.95.147:5000/api/play */
 let baseURL = "http://15.164.95.147:5000/"
+let localURL = "http://127.0.0.1:5000/"
 
 class DataManager : ObservableObject {
     static let shared = DataManager()
     private init() {}
     
-    @Published var dataList = [Data]()
+    @Published var dataList = [Item]()
     @Published var pressed: Bool = false
     @Published var isLoading: Bool = false
     
-    @Published var randomSubject: String = "다크 페이트: 죽음의 예언"
+    @Published var randomSubject: String = "로딩 중..."
     @Published var subjectList = [String]()
     
     func resetData() {
@@ -55,27 +56,53 @@ class DataManager : ObservableObject {
         }
     }
     
-    func loadSpeech(_ command: String) async {
+    func loadSpeech(_ audioURL: URL) async {
+        
+        guard let audioData = try? Data(contentsOf: audioURL) else {
+            print("Failed to load audio data")
+            return
+        }
+        print(audioURL)
         var url = URL(string: baseURL + "api/whisper")
         
+        let boundary = "Boundary-\(UUID().uuidString)"
         
-        var requestURL = URLRequest(url: url!)
-        requestURL.httpMethod = "POST"
-        requestURL.setValue("application/json", forHTTPHeaderField: "Content-Type")
+        var request = URLRequest(url: url!)
+        print(request)
+        request.httpMethod = "POST"
+        request.setValue("multipart/form-data; boundary=\(boundary)", forHTTPHeaderField: "Content-Type")
         
-        URLSession.shared.dataTask(with: requestURL) { data, response, error in
+        var body = Data()
+        let boundaryPrefix = "—\(boundary)\r\n"
+        
+        body.append(boundaryPrefix.data(using: .utf8)!)
+        body.append("Content-Disposition: form-data; name=\"file\"; filename=\"inputAudio.m4a\"\r\n".data(using: .utf8)!)
+        body.append("Content-Type: application/octet-stream\r\n\r\n".data(using: .utf8)!)
+        body.append(audioData)
+        body.append("\r\n".data(using: .utf8)!)
+
+        body.append(boundaryPrefix.data(using: .utf8)!)
+        
+        request.httpBody = body
+        print(request)
+        URLSession.shared.dataTask(with: request) { data, response, error in
+            print("URLSession")
             guard error == nil else {
                 print(error!.localizedDescription)
                 return
             }
+            print("NOT error")
             if let data = data, let response = response as? HTTPURLResponse, response.statusCode == 200 {
                 do {
                     let userResponse = try? JSONDecoder().decode(String.self, from: data)
+                    print("YES")
                     DispatchQueue.main.async {
+                        print(userResponse!)
                         self.subjectList.append(userResponse!)
                     }
                 }
             }
+            print("The END")
         }.resume()
     }
     
@@ -131,7 +158,7 @@ class DataManager : ObservableObject {
             
             if let data = data, let response = response as? HTTPURLResponse, response.statusCode == 200 {
                 do {
-                    let userResponse = try? JSONDecoder().decode(Data.self, from: data)
+                    let userResponse = try? JSONDecoder().decode(Item.self, from: data)
                     DispatchQueue.main.async {
                         if (self.dataList.count == 0) {
                             GameManager.shared.healthState = .normal

@@ -21,7 +21,7 @@ struct InstructionResponse: Decodable {
    let instruction: [Instruction]
 }
 
-struct Data: Decodable {
+struct Item: Decodable {
     var dall: String
     var content: String
     var hp: Int

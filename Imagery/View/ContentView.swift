@@ -30,6 +30,13 @@ struct ContentView: View {
                 OverallAlbumView()
             }
         }
+        .onAppear {
+            if DataManager.shared.randomSubject == "로딩 중..." {
+                Task {
+                    await DataManager.shared.getSubject()
+                }
+            }
+        }
     }
 }
 

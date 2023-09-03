@@ -8,25 +8,119 @@
 import SwiftUI
 import AVFoundation
 
+class AudioRecorderManger: NSObject, ObservableObject, AVAudioPlayerDelegate {
+    
+    //음성메모 녹음 관련 프로퍼티
+    var audioRecorder: AVAudioRecorder?
+    @Published var isRecording = false
+    
+    // 음성메모 재생 관련 프로퍼티
+    var audioPlayer: AVAudioPlayer?
+    @Published var isPlaying = false
+    @Published var isPaused = false
+    
+    // 음성메모된 데이터
+    @Published var recordedFiles = [URL]()
+    
+}
+
+// MARK: - 음성메모 녹음 관련 메서드
+extension AudioRecorderManger {
+    func startRecording() {
+        let fileURL = getDocumentsDirectory().appendingPathComponent("inputAudio.m4a")
+        self.recordedFiles.append(fileURL)
+        let settings = [
+            AVFormatIDKey: Int(kAudioFormatMPEG4AAC),
+            AVSampleRateKey: 12000,
+            AVNumberOfChannelsKey: 2,
+            AVEncoderAudioQualityKey: AVAudioQuality.max.rawValue
+        ]
+        
+        do {
+            audioRecorder = try AVAudioRecorder(url: fileURL, settings: settings)
+            audioRecorder?.record()
+            self.isRecording = true
+        } catch {
+            print("녹음 중 오류 발생: \(error.localizedDescription)")
+        }
+    }
+    
+    func stopRecording() {
+        audioRecorder?.stop()
+        self.isRecording = false
+        
+        let sourceURL = getDocumentsDirectory().appendingPathComponent("inputAudio.m4a")
+        //let destinationURL = getDocumentsDirectory().appendingPathComponent("recordedAudio.m4a")
+        
+        do {
+            // 녹음이 끝난 후 파일 다
+            //try FileManager.default.moveItem(at: sourceURL, to: destinationURL)
+            //print("저장 파일 위치: \(destinationURL)")
+            self.recordedFiles.append(sourceURL)
+            Task {
+                await DataManager.shared.loadSpeech(sourceURL)
+            }
+        } catch {
+            print("Save recorded file error: \(error.localizedDescription)")
+        }
+    }
+    
+    func loadFileFromLocalPath(_ localFilePath: String) ->Data? {
+       return try? Data(contentsOf: URL(fileURLWithPath: localFilePath))
+    }
+    
+    private func getDocumentsDirectory() -> URL {
+        let paths = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)
+        return paths[0]
+    }
+    
+
+}
+// MARK: 음성메모 재생 관련 메서드
+extension AudioRecorderManger {
+    func startPlaying(recordingURL: URL) {
+        do {
+            audioPlayer = try AVAudioPlayer(contentsOf: recordingURL)
+            audioPlayer?.delegate = self
+            audioPlayer?.play()
+            self.isPlaying = true
+            self.isPaused = false
+        } catch {
+            print("재생 중 오류 발생:")
+        }
+    }
+    
+    func stopPlaying() {
+        audioPlayer?.stop()
+        self.isPlaying = false
+    }
+    
+    func pausePlaying() {
+        audioPlayer?.pause()
+        self.isPaused = true
+    }
+    
+    func resumePlaying() {
+        audioPlayer?.play()
+        self.isPaused = false
+    }
+    
+    func audioPlayerDidFinishPlaying(_ player: AVAudioPlayer, successfully flag: Bool) {
+        self.isPlaying = false
+        self.isPaused = false
+    }
+    
+}
+
+
+
 struct OwnStoryView: View {
-    /*
-    // Create an audio session
-    let session = AVAudioSession.sharedInstance()
-
-    // Set the audio session category and mode
-    try session.setCategory(.playAndRecord, mode: .default)
-
-    // Activate the audio session
-    try session.setActive(true)
-
-    // Create an audio recorder
-    let recorder = try AVAudioRecorder(url: URL(string: "./recording.wav")!, settings: [:])
-    */
+    @StateObject var audioRecorder = AudioRecorderManger()
+    
     let title = "만들고 싶은 이야기를\n적어주세요"
     
     let margin = 20.0
     let radius = 8.0
-    var isRecording: Bool = false
     
     @State private var text = ""
     
@@ -55,17 +149,30 @@ struct OwnStoryView: View {
                     .padding(.bottom, 36)
                 
                 StoryInputView()
-                Button("Record") {/*
-                    if isRecording == false {
-                        recorder.record()
+                /*
+                Button(action: {
+                    if audioRecorder.isRecording {
+                        audioRecorder.stopRecording()
                     } else {
-                        recorder.stop()
-                    }*/
+                        audioRecorder.startRecording()
+                    }
+                }) {
+                    Text(audioRecorder.isRecording ? "Stop Recording" : "Start Recording")
+                        .padding()
+                        .background(audioRecorder.isRecording ? Color.red : Color.green)
+                        .foregroundColor(Color.white)
+                        .cornerRadius(10)
                 }
+                
+                if (audioRecorder.recordedFiles.count > 0) {
+                    Text("Recording saved at: \(audioRecorder.recordedFiles[0].path)")
+                        .padding()
+                }*/
                 NextButton()
             }
         }
     }
+    
     
     func setTextColor(_ text: String) -> Color {
         if text.isEmpty {
