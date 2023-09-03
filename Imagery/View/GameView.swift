@@ -49,9 +49,12 @@ struct GameView: View {
     let margin = 20.0
     let radius = 8.0
     
+    @State private var background: Color = Color.OasisColors.darkGreen
+    
     var body: some View {
         ZStack {
-            //TODO: 스토리 진행 상황별 배경색 변경
+            gameManager.background.ignoresSafeArea()
+            
             if showImageOnly {
                 IllustView(dataManager.dataList.last!.dall)
                     .zIndex(1)
@@ -99,8 +102,6 @@ struct GameView: View {
                             .foregroundColor(Color.OasisColors.white)
                             .padding(.bottom, 36)
                             .padding(.horizontal, margin)
-                            .accessibilityLabel("체력 : \(dataManager.dataList[lastIndex].hp.description)")
-                            .accessibilityIdentifier("HP")
                         
                         StoryView(dataManager.dataList[lastIndex].content, dataManager.dataList[lastIndex].dall)
                             .accessibilityLabel("\(dataManager.dataList[lastIndex].content)")
@@ -120,7 +121,7 @@ struct GameView: View {
                                         selectedKey = "a"
                                     } label: {
                                         Text(a)
-                                            .foregroundColor(setOptionTextColor("a"))
+                                            .foregroundColor(dataManager.pressed ? setOptionTextColor("a") : Color.OasisColors.white)
                                             .padding(.vertical, 16)
                                             .padding(.top, 4)
                                             .padding(.horizontal, margin)
@@ -132,7 +133,7 @@ struct GameView: View {
                                 Divider()
                                     .overlay(Color.OasisColors.white20)
                             }
-                            .background(setOptionBackground("a"))
+                            .background(dataManager.pressed ? setOptionBackground("a") : .clear)
                             
                             VStack {
                                 if let b = dataManager.dataList[lastIndex].choices["b"] {
@@ -146,7 +147,7 @@ struct GameView: View {
                                         selectedKey = "b"
                                     } label: {
                                         Text(b)
-                                            .foregroundColor(setOptionTextColor("b"))
+                                            .foregroundColor(dataManager.pressed ? setOptionTextColor("b") : Color.OasisColors.white)
                                             .padding(.vertical, 16)
                                             .padding(.top, 4)
                                             .padding(.horizontal, margin)
@@ -159,7 +160,7 @@ struct GameView: View {
                                 Divider()
                                     .overlay(Color.OasisColors.white20)
                             }
-                            .background(setOptionBackground("b"))
+                            .background(dataManager.pressed ? setOptionBackground("b") : .clear)
                             
                             VStack {
                                 if let c = dataManager.dataList[lastIndex].choices["c"] {
@@ -173,7 +174,7 @@ struct GameView: View {
                                         selectedKey = "c"
                                     } label: {
                                         Text(c)
-                                            .foregroundColor(setOptionTextColor("c"))
+                                            .foregroundColor(dataManager.pressed ? setOptionTextColor("c") : Color.OasisColors.white)
                                             .padding(.vertical, 16)
                                             .padding(.top, 4)
                                             .padding(.horizontal, margin)
@@ -185,7 +186,7 @@ struct GameView: View {
                                 Divider()
                                     .overlay(Color.OasisColors.white20)
                             }
-                            .background(setOptionBackground("c"))
+                            .background(dataManager.pressed ? setOptionBackground("c") : .clear)
                         }
                         .font(.headline)
                         .fontWeight(.semibold)
@@ -235,6 +236,7 @@ private extension GameView {
                 GameManager.shared.gameState = .initial
             } label: {
                 Image(systemName: HeaderItem.house.label)
+                    .padding(3)
             }
             .frame(maxWidth: .infinity, alignment: .leading)
             
@@ -248,11 +250,14 @@ private extension GameView {
                     .fill(Color.OasisColors.white10)
             )
             .frame(maxWidth: .infinity, alignment: .center)
+            .accessibilityLabel("체력 : \(hp)")
+            .accessibilityIdentifier("HP")
             
             Button {
                 GameManager.shared.gameState = .illustCollection
             } label: {
                 Image(systemName: HeaderItem.photo.label)
+                    .padding(3)
             }
             .frame(maxWidth: .infinity, alignment: .trailing)
         }
@@ -269,8 +274,13 @@ private extension GameView {
                     image.resizable()
                         .scaledToFit()
                 } placeholder: {
-                    ProgressView()
+                    Color.gray
+                        .opacity(0.5)
+                        .overlay {
+                            ProgressView()
+                        }
                 }
+                .frame(width: 300, height: 300)
                 .accessibilityLabel("이미지")
                 .accessibilityIdentifier("Image")
                 .onTapGesture {
@@ -314,6 +324,7 @@ private extension GameView {
                     .padding(.trailing, margin)
                     .padding(.bottom, 3)
                 
+                /*
                 Text("일러스트 제목")
                     .font(.title2)
                     .fontWeight(.bold)
@@ -325,26 +336,18 @@ private extension GameView {
                             .fill(Color.OasisColors.yellow10)
                     )
                     .padding(.horizontal, 10)
-                
+                */
                 AsyncImage(url: URL(string: imgURL)) { image in
                     image.resizable()
                         .scaledToFit()
                 } placeholder: {
-                    ProgressView()
+                    Color.gray
+                        .opacity(0.5)
+                        .overlay {
+                            ProgressView()
+                        }
                 }
-<<<<<<< Updated upstream
-                .overlay(
-                    Rectangle()
-                    .stroke(
-                        Color.OasisColors.yellow,
-                        lineWidth: 8
-                    )
-                )
-                .padding(8)
-=======
                 .frame(width: 374, height: 374)
-                .padding(12)
->>>>>>> Stashed changes
                 .accessibilityLabel("이미지")
                 .accessibilityIdentifier("Image")
                 

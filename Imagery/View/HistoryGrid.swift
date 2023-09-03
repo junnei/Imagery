@@ -21,9 +21,10 @@ struct HistoryGrid: View {
                             .overlay {
                                 ZStack {
                                     Text(DataManager.shared.subjectList[index])
-                                        .font(.subheadline)
-                                        .fontWeight(.semibold)
+                                        .font(.title2)
+                                        .fontWeight(.bold)
                                         .foregroundColor(Color.OasisColors.white)
+                                    
                                     RoundedRectangle(cornerRadius: 12)
                                         .stroke(Color.OasisColors.white)
                                 }

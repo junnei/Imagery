@@ -121,9 +121,10 @@ private extension OverallAlbumView {
                 Spacer()
                 
                 ZStack {
+                    /*
                     Text("일러스트 제목")
                         .frame(maxWidth: .infinity, alignment: .center)
-                    
+                    */
                     Button {
                         self.showIllustPopup = false
                     } label: {
@@ -154,9 +155,17 @@ private extension OverallAlbumView {
                     )
                     .padding(.horizontal, margin)
                 
-                Image(img)
-                    .resizable()
-                    .scaledToFit()
+                AsyncImage(url: URL(string: img)) { image in
+                    image.resizable()
+                        .scaledToFit()
+                } placeholder: {
+                    Color.gray
+                        .opacity(0.5)
+                        .overlay {
+                            ProgressView()
+                        }
+                }
+                .frame(width: 390, height: 390)
                 
                 Spacer()
                 
