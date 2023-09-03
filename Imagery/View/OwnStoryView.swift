@@ -122,6 +122,7 @@ private extension OwnStoryView {
             GameManager.shared.gameState = .playing
             Task {
                 await DataManager.shared.loadData(text)
+                await DataManager.shared.loadSummary(text)
             }
         } label: {
             Text("다음")

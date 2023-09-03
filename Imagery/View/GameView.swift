@@ -58,7 +58,38 @@ struct GameView: View {
             
             VStack{
                 if dataManager.isLoading {
-                    ProgressView()
+                    if dataManager.dataList.isEmpty {
+                        HeaderView(5)
+                            .foregroundColor(Color.OasisColors.white)
+                            .padding(.bottom, 39)
+                            .padding(.horizontal, margin)
+                    }
+                    else {
+                        HeaderView(Int(dataManager.dataList.last!.hp))
+                            .foregroundColor(Color.OasisColors.white)
+                            .padding(.bottom, 39)
+                            .padding(.horizontal, margin)
+                    }
+                    
+                    StoryView("로딩 중 입니다...", "")
+                        .overlay {
+                            ProgressView()
+                        }
+                        .accessibilityLabel("로딩 중 입니다")
+                        .accessibilityIdentifier("content")
+                    /*
+                    VStack {
+                        Button("") {
+                        }
+                        Divider()
+                        Button("") {
+                        }
+                        Divider()
+                        Button("") {
+                        }
+                        Divider()
+                    }*/
+                            
                 }
                 else {
                     let lastIndex = dataManager.dataList.count - 1
@@ -168,7 +199,7 @@ private extension GameView {
             .frame(maxWidth: .infinity, alignment: .center)
             
             Button {
-                //TODO: 갤러리 뷰로 이동
+                GameManager.shared.gameState = .illustCollection
             } label: {
                 Image(systemName: HeaderItem.photo.label)
             }
@@ -182,25 +213,29 @@ private extension GameView {
     @ViewBuilder
     func StoryView(_ content: String, _ imgURL: String) -> some View {
         ScrollView {
-            Text(content)
-                .font(.headline)
-                .foregroundColor(Color.OasisColors.white)
-                .frame(maxWidth: .infinity, alignment: .leadingFirstTextBaseline)
-            
-            
-            AsyncImage(url: URL(string: imgURL)) { image in
-                image.resizable()
-                    .scaledToFit()
-            } placeholder: {
-                ProgressView()
+            HStack {
+                Text(content)
+                    .font(.headline)
+                    .foregroundColor(Color.OasisColors.white)
+                Spacer()
             }
-            .accessibilityLabel("이미지")
-            .accessibilityIdentifier("Image")
-            .onTapGesture {
-                self.showImageOnly = true
+                //.frame(maxWidth: .infinity, alignment: .leadingFirstTextBaseline)
+            
+            if imgURL != "" {
+                AsyncImage(url: URL(string: imgURL)) { image in
+                    image.resizable()
+                        .scaledToFit()
+                } placeholder: {
+                    ProgressView()
+                }
+                .accessibilityLabel("이미지")
+                .accessibilityIdentifier("Image")
+                .onTapGesture {
+                    self.showImageOnly = true
+                }
             }
         }
-        .padding(.horizontal, 18)
+        .padding(18)
         .background(
             RoundedRectangle(cornerRadius: radius)
                 .fill(Color.OasisColors.white10))

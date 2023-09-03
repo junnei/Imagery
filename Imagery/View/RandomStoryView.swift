@@ -10,8 +10,11 @@ import SwiftUI
 struct RandomStoryView: View {
     let margin = 20.0
     
+    @StateObject var dataManager = DataManager.shared
+    
     @State private var isPressed = false
     @State private var isContentDelivered = false
+    @State private var randomSubject = "다크 페이트: 죽음의 예언"
     
     var body: some View {
         ZStack {
@@ -20,7 +23,7 @@ struct RandomStoryView: View {
             
             VStack(alignment: .leading) {
                 Button {
-                    
+                    GameManager.shared.gameState = .initial
                 } label: {
                     Image(systemName: HeaderItem.back.label)
                         .foregroundColor(Color.OasisColors.white)
@@ -103,6 +106,7 @@ private extension RandomStoryView {
     func RandomButton() -> some View {
         Button {
             isPressed = true
+            isContentDelivered = true
         } label: {
             Text("랜덤 소재 뽑기")
                 .font(.title2)
@@ -121,7 +125,7 @@ private extension RandomStoryView {
     
     @ViewBuilder
     func ContentBox() -> some View {
-        Text("다크 페이트: 죽음의 예언")
+        Text(dataManager.randomSubject)
             .font(.title2)
             .fontWeight(.bold)
             .padding(.vertical, 38)
@@ -141,7 +145,9 @@ private extension RandomStoryView {
     func BottomButtons() -> some View {
         HStack(spacing: 24) {
             Button {
-                
+                Task {
+                    await DataManager.shared.getSubject()
+                }
             } label: {
                 Text("다시 뽑기")
                     .font(.title3)
@@ -155,7 +161,12 @@ private extension RandomStoryView {
             }
             
             Button {
-                
+                DataManager.shared.isLoading = true
+                GameManager.shared.gameState = .playing
+                dataManager.subjectList.append(dataManager.randomSubject)
+                Task {
+                    await DataManager.shared.loadData(dataManager.randomSubject)
+                }
             } label: {
                 Text("시작하기")
                     .font(.title3)

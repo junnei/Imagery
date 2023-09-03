@@ -18,18 +18,22 @@ struct AlbumGrid: View {
     var body: some View {
         ScrollView {
             LazyVGrid(columns: columns, spacing: 32) {
-                ForEach(0..<10) { _ in
+                ForEach(0..<DataManager.shared.dataList.count) { index in
                     VStack(spacing: 8) {
-                        Image(imgName)
-                            .resizable()
-                            .scaledToFit()
-                            .cornerRadius(12)
-                            .padding(.horizontal, 16)
-                            .onTapGesture {
-                                self.showIllustPopup = true
-                                self.selectedImg = imgName
-                            }
-                        Text(imgName)
+                        
+                        AsyncImage(url: URL(string: DataManager.shared.dataList[index].dall)) { image in
+                            image.resizable()
+                                .scaledToFit()
+                                .cornerRadius(12)
+                                .padding(.horizontal, 16)
+                                .onTapGesture {
+                                    self.showIllustPopup = true
+                                    self.selectedImg = imgName
+                                }
+                        } placeholder: {
+                            ProgressView()
+                        }
+                        Text(String(index))
                             .font(.subheadline)
                             .fontWeight(.semibold)
                             .foregroundColor(Color.OasisColors.white)

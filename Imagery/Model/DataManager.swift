@@ -7,6 +7,9 @@
 
 import Foundation
 
+/* http://15.164.95.147:5000/api/play */
+let baseURL = "http://127.0.0.1:5000/"
+
 class DataManager : ObservableObject {
     static let shared = DataManager()
     private init() {}
@@ -15,6 +18,8 @@ class DataManager : ObservableObject {
     @Published var pressed: Bool = false
     @Published var isLoading: Bool = false
     
+    @Published var randomSubject: String = "다크 페이트: 죽음의 예언"
+    @Published var subjectList = [String]()
     
     func resetData() {
         if let url = URL(string: "http://15.164.95.147:5000/api/reset") {
@@ -27,9 +32,57 @@ class DataManager : ObservableObject {
         }
     }
     
+    
+    
+    func getSubject() {
+        if let url = URL(string: baseURL + "api/getSubject") {
+            URLSession.shared.dataTask(with: url) { data, response, error in
+                guard error == nil else {
+                    print(error!.localizedDescription)
+                    return
+                }
+                
+                if let data = data, let response = response as? HTTPURLResponse, response.statusCode == 200 {
+                    do {
+                        let userResponse = try? JSONDecoder().decode(String.self, from: data)
+                        DispatchQueue.main.async {
+                            self.randomSubject = userResponse ?? "다크 페이트: 죽음의 예언"
+                        }
+                    }
+                }
+            }.resume()
+        }
+    }
+    
+    func loadSummary(_ command: String) async {
+        var url = URL(string: baseURL + "api/get_summary")
+        
+        let command_query = URLQueryItem(name: "ownStory", value: command)
+        url!.append(queryItems: [command_query])
+        
+        
+        var requestURL = URLRequest(url: url!)
+        requestURL.httpMethod = "POST"
+        requestURL.setValue("application/json", forHTTPHeaderField: "Content-Type")
+        
+        URLSession.shared.dataTask(with: requestURL) { data, response, error in
+            guard error == nil else {
+                print(error!.localizedDescription)
+                return
+            }
+            if let data = data, let response = response as? HTTPURLResponse, response.statusCode == 200 {
+                do {
+                    let userResponse = try? JSONDecoder().decode(String.self, from: data)
+                    DispatchQueue.main.async {
+                        self.subjectList.append(userResponse!)
+                    }
+                }
+            }
+        }.resume()
+    }
+    
     func loadData(_ command: String) async {
-        /* http://15.164.95.147:5000/api/play */
-        var url = URL(string: "http://127.0.0.1:5000/api/play")
+        var url = URL(string: baseURL + "api/play")
         
         if (command != "") {
             if (command == "a" || command == "b" || command == "c") {
@@ -45,7 +98,7 @@ class DataManager : ObservableObject {
         requestURL.httpMethod = "POST"
         requestURL.setValue("application/json", forHTTPHeaderField: "Content-Type")
         
-        await URLSession.shared.dataTask(with: requestURL) { data, response, error in
+        URLSession.shared.dataTask(with: requestURL) { data, response, error in
             guard error == nil else {
                 print(error!.localizedDescription)
                 return
@@ -80,6 +133,7 @@ class DataManager : ObservableObject {
                         self.dataList.append(userResponse!)
                         self.pressed = false
                         self.isLoading = false
+                        print(self.dataList.description)
                         print(userResponse?.content)
                         print(userResponse?.dall)
                         print(userResponse?.hp.description)

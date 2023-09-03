@@ -31,6 +31,7 @@ enum ButtonType {
 }
 
 struct StartView: View {
+    @StateObject var dataManager = DataManager.shared
     let appLogo = "AppLogo"
     let margin = 20.0
     let radius = 12.0
@@ -65,6 +66,7 @@ struct StartView: View {
                     PlayButton(buttonType: .recentStory)
                         .accessibilityLabel(ButtonType.recentStory.label)
                         .accessibilityIdentifier("recentStory")
+                        .disabled(dataManager.dataList.count > 0 ? false : true)
                     PlayButton(buttonType: .ownStory)
                         .accessibilityLabel(ButtonType.ownStory.label)
                         .accessibilityIdentifier("ownStory")
@@ -85,6 +87,9 @@ struct StartView: View {
             Spacer()
         }
         .padding(margin)
+        .onAppear {
+            isFirstPlay = dataManager.dataList.isEmpty
+        }
     }
 }
 
@@ -102,12 +107,16 @@ struct PlayButton: View {
             //FIXME: 버튼에 따라 perform 상세 수정
             DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
                 switch buttonType {
-                case .recentStory, .randomStory :
+                case .recentStory :
+                    GameManager.shared.gameState = .playing
+                case .randomStory :
+                    GameManager.shared.gameState = .randomStory
+                    /*
                     DataManager.shared.isLoading = true
                     GameManager.shared.gameState = .playing
                     Task {
                         await DataManager.shared.loadData("")
-                    }
+                    }*/
                 case .ownStory :
                     GameManager.shared.gameState = .ownStory
                 case .storyHistory :
@@ -130,10 +139,19 @@ struct PlayButton: View {
         }
     }
     func SetButtonLabelColor(_ buttonType: ButtonType, _ isPressed: Bool) -> Color {
-        if (buttonType == .recentStory) || (isPressed) {
-            return Color.OasisColors.darkGreen
-        } else {
-            return Color.OasisColors.white
+        if (buttonType == .recentStory) {
+            if DataManager.shared.dataList.count > 0 {
+                return Color.OasisColors.darkGreen
+            } else {
+                return Color.gray
+            }
+        }
+        else {
+            if (isPressed) {
+                return Color.OasisColors.darkGreen
+            } else {
+                return Color.OasisColors.white
+            }
         }
     }
     

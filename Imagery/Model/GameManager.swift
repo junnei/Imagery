@@ -9,11 +9,12 @@ import Foundation
 
 enum gameState{
     case initial
+    case ownStory
+    case randomStory
     case playing
     case result
     case storyHistory
     case illustCollection
-    case ownStory
 }
 
 enum healthState{

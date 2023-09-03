@@ -72,7 +72,7 @@ private extension OverallAlbumView {
     func HeaderView() -> some View {
         ZStack {
             Button {
-                
+                GameManager.shared.gameState = .initial
             } label: {
                 Image(systemName: HeaderItem.back.label)
             }
@@ -93,9 +93,9 @@ private extension OverallAlbumView {
     func Subheader() -> some View {
         ScrollView(.horizontal) {
             HStack(alignment: .top, spacing: 20) {
-                ForEach(0..<10) { idx in
+                ForEach(0..<DataManager.shared.subjectList.count) { idx in
                     VStack(spacing: 2) {
-                        Text("소재")
+                        Text(DataManager.shared.subjectList[idx])
                             .fontWeight(.semibold)
                             .foregroundColor(setSubheaderItemColor(idx))
                             .onTapGesture {
