@@ -83,18 +83,6 @@ struct GameView: View {
                         .accessibilityLabel("로딩 중 입니다")
                         .accessibilityIdentifier("content")
                         .padding(.bottom, 59)
-                    /*
-                    VStack {
-                        Button("") {
-                        }
-                        Divider()
-                        Button("") {
-                        }
-                        Divider()
-                        Button("") {
-                        }
-                        Divider()
-                    }*/
                             
                 }
                 else {
@@ -318,6 +306,8 @@ private extension GameView {
         ZStack {
             Color.OasisColors.darkGreen.opacity(0.9)
             
+            AsyncImageView(url: URL(string: imgURL)!)
+            
             VStack(spacing: 44) {
                 Button {
                     self.showImageOnly = false
@@ -343,19 +333,8 @@ private extension GameView {
                     )
                     .padding(.horizontal, 10)
                 */
-                AsyncImage(url: URL(string: imgURL)) { image in
-                    image.resizable()
-                        .scaledToFit()
-                } placeholder: {
-                    Color.gray
-                        .opacity(0.5)
-                        .overlay {
-                            ProgressView()
-                        }
-                }
-                .frame(width: 374, height: 374)
-                .accessibilityLabel("이미지")
-                .accessibilityIdentifier("Image")
+                Spacer()
+                    .frame(width: 390, height: 390)
                 
                 Text("일러스트에 손을 가져다대어 그림을 느껴보세요")
                     .font(.headline)

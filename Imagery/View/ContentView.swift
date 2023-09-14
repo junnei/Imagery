@@ -9,6 +9,7 @@ import SwiftUI
 
 struct ContentView: View {
     @StateObject var gameManager = GameManager.shared
+    
     @State private var isLoading = false
     var body: some View {
         ZStack {
@@ -36,6 +37,8 @@ struct ContentView: View {
                     await DataManager.shared.getSubject()
                 }
             }
+            
+            HapticManager.shared.prepareHaptics()
         }
     }
 }
