@@ -12,6 +12,8 @@
 		5BF461C52AA4055A00E36BDA /* InAlbumView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BF461C42AA4055A00E36BDA /* InAlbumView.swift */; };
 		5BF461C72AA4056300E36BDA /* AlbumGrid.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BF461C62AA4056300E36BDA /* AlbumGrid.swift */; };
 		5BF461C92AA4059200E36BDA /* OverallAlbumView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BF461C82AA4059200E36BDA /* OverallAlbumView.swift */; };
+		BF08BAEA2AB2105F00B44385 /* AsyncImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF08BAE92AB2105F00B44385 /* AsyncImage.swift */; };
+		BF08BAEC2AB2C73500B44385 /* HapticManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF08BAEB2AB2C73500B44385 /* HapticManager.swift */; };
 		BF23ED072AA434AD00851962 /* HistoryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF23ED062AA434AD00851962 /* HistoryView.swift */; };
 		BF23ED0A2AA435FF00851962 /* HistoryGrid.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF23ED092AA435FF00851962 /* HistoryGrid.swift */; };
 		BF9A267E2AA1270500F73E17 /* ImageryApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF9A267D2AA1270500F73E17 /* ImageryApp.swift */; };
@@ -33,6 +35,8 @@
 		5BF461C42AA4055A00E36BDA /* InAlbumView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InAlbumView.swift; sourceTree = "<group>"; };
 		5BF461C62AA4056300E36BDA /* AlbumGrid.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AlbumGrid.swift; sourceTree = "<group>"; };
 		5BF461C82AA4059200E36BDA /* OverallAlbumView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OverallAlbumView.swift; sourceTree = "<group>"; };
+		BF08BAE92AB2105F00B44385 /* AsyncImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AsyncImage.swift; sourceTree = "<group>"; };
+		BF08BAEB2AB2C73500B44385 /* HapticManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HapticManager.swift; sourceTree = "<group>"; };
 		BF23ED062AA434AD00851962 /* HistoryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HistoryView.swift; sourceTree = "<group>"; };
 		BF23ED092AA435FF00851962 /* HistoryGrid.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HistoryGrid.swift; sourceTree = "<group>"; };
 		BF9A267A2AA1270500F73E17 /* Imagery.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Imagery.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -126,6 +130,7 @@
 				BF23ED092AA435FF00851962 /* HistoryGrid.swift */,
 				BF9A26922AA1E99E00F73E17 /* GameView.swift */,
 				BF23ED082AA434EA00851962 /* Album */,
+				BF08BAE92AB2105F00B44385 /* AsyncImage.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -136,6 +141,7 @@
 				BF9A26902AA1E93100F73E17 /* GameManager.swift */,
 				BF9A269A2AA1EEBB00F73E17 /* DataManager.swift */,
 				BF9A26972AA1EA4800F73E17 /* Item.swift */,
+				BF08BAEB2AB2C73500B44385 /* HapticManager.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -233,9 +239,11 @@
 				BF9A26982AA1EA4800F73E17 /* Item.swift in Sources */,
 				5BF461BF2AA3EFDE00E36BDA /* RandomStoryView.swift in Sources */,
 				5BF461C72AA4056300E36BDA /* AlbumGrid.swift in Sources */,
+				BF08BAEA2AB2105F00B44385 /* AsyncImage.swift in Sources */,
 				BF9A26932AA1E99E00F73E17 /* GameView.swift in Sources */,
 				BF23ED0A2AA435FF00851962 /* HistoryGrid.swift in Sources */,
 				BF9A26912AA1E93100F73E17 /* GameManager.swift in Sources */,
+				BF08BAEC2AB2C73500B44385 /* HapticManager.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
