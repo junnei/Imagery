@@ -246,7 +246,7 @@ private extension GameView {
             .accessibilityIdentifier("HP")
             
             Button {
-                GameManager.shared.gameState = .illustCollection
+                GameManager.shared.gameState = .inIllustCollection
             } label: {
                 Image(systemName: HeaderItem.photo.label)
                     .padding(3)
