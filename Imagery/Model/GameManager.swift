@@ -15,7 +15,8 @@ enum gameState{
     case playing
     case result
     case storyHistory
-    case illustCollection
+    case inIllustCollection
+    case allIllustCollection
 }
 
 enum healthState{

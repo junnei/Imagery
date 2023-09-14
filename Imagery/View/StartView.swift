@@ -125,7 +125,7 @@ struct PlayButton: View {
                 case .storyHistory :
                     GameManager.shared.gameState = .storyHistory
                 case .illustCollection :
-                    GameManager.shared.gameState = .illustCollection
+                    GameManager.shared.gameState = .allIllustCollection
                 }
             }
         } label: {

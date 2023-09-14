@@ -27,7 +27,9 @@ struct ContentView: View {
                 GameView()
             case .storyHistory:
                 HistoryView()
-            case .illustCollection:
+            case .inIllustCollection:
+                InAlbumView()
+            case .allIllustCollection:
                 OverallAlbumView()
             }
         }

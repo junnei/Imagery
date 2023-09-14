@@ -45,7 +45,7 @@ private extension InAlbumView {
     func HeaderView() -> some View {
         ZStack {
             Button {
-                
+                GameManager.shared.gameState = .playing
             } label: {
                 Image(systemName: HeaderItem.back.label)
             }
