@@ -62,28 +62,20 @@ struct GameView: View {
             
             VStack{
                 if dataManager.isLoading {
-                    if dataManager.dataList.isEmpty {
-                        HeaderView(5)
-                            .foregroundColor(Color.OasisColors.white)
-                            .padding(.bottom, 36)
-                            .padding(.top, 61)
-                            .padding(.horizontal, margin)
-                    }
-                    else {
-                        HeaderView(Int(dataManager.dataList.last!.hp))
-                            .foregroundColor(Color.OasisColors.white)
-                            .padding(.bottom, 36)
-                            .padding(.horizontal, margin)
+                    Spacer()
+                    
+                    VStack(spacing: 24) {
+                        Text("로딩 중입니다...")
+                            .font(.headline)
+                            .foregroundColor(Color.OasisColors.yellow)
+                            .accessibilityLabel("로딩 중 입니다")
+                            .accessibilityIdentifier("content")
+                        
+                        ProgressView()
+                            .tint(Color.OasisColors.yellow)
                     }
                     
-                    StoryView("로딩 중 입니다...", "")
-                        .overlay {
-                            ProgressView()
-                        }
-                        .accessibilityLabel("로딩 중 입니다")
-                        .accessibilityIdentifier("content")
-                        .padding(.bottom, 59)
-                            
+                    Spacer()
                 }
                 else {
                     let lastIndex = dataManager.dataList.count - 1
