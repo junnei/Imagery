@@ -50,40 +50,30 @@ struct StartView: View {
                     DataManager.shared.resetData()
                 }
             
-            //FIXME: enum으로 처리
-            if isFirstPlay {
-                VStack(spacing: gap) {
-                    PlayButton(buttonType: .ownStory)
-                        .accessibilityLabel(ButtonType.ownStory.label)
-                        .accessibilityIdentifier("ownStory")
-                    PlayButton(buttonType: .randomStory)
-                        .accessibilityLabel(ButtonType.randomStory.label)
-                        .accessibilityIdentifier("randomStory")
+            VStack(spacing: gap) {
+                PlayButton(buttonType: .recentStory)
+                    .accessibilityLabel(ButtonType.recentStory.label)
+                    .accessibilityIdentifier("recentStory")
+                    .disabled(dataManager.dataList.count > 0 ? false : true)
+                    .opacity(isFirstPlay ? 0 : 1)
+                PlayButton(buttonType: .ownStory)
+                    .accessibilityLabel(ButtonType.ownStory.label)
+                    .accessibilityIdentifier("ownStory")
+                PlayButton(buttonType: .randomStory)
+                    .accessibilityLabel(ButtonType.randomStory.label)
+                    .accessibilityIdentifier("randomStory")
+                HStack(spacing: gap) {
+                    PlayButton(buttonType: .storyHistory)
+                        .accessibilityLabel(ButtonType.storyHistory.label)
+                        .accessibilityIdentifier("storyHistory")
+                        .opacity(isFirstPlay ? 0 : 1)
+                    PlayButton(buttonType: .illustCollection)
+                        .accessibilityLabel(ButtonType.illustCollection.label)
+                        .accessibilityIdentifier("illustCollection")
+                        .opacity(isFirstPlay ? 0 : 1)
                 }
-                .padding(.top, 83)
-            } else {
-                VStack(spacing: gap) {
-                    PlayButton(buttonType: .recentStory)
-                        .accessibilityLabel(ButtonType.recentStory.label)
-                        .accessibilityIdentifier("recentStory")
-                        .disabled(dataManager.dataList.count > 0 ? false : true)
-                    PlayButton(buttonType: .ownStory)
-                        .accessibilityLabel(ButtonType.ownStory.label)
-                        .accessibilityIdentifier("ownStory")
-                    PlayButton(buttonType: .randomStory)
-                        .accessibilityLabel(ButtonType.randomStory.label)
-                        .accessibilityIdentifier("randomStory")
-                    HStack(spacing: gap) {
-                        PlayButton(buttonType: .storyHistory)
-                            .accessibilityLabel(ButtonType.storyHistory.label)
-                            .accessibilityIdentifier("storyHistory")
-                        PlayButton(buttonType: .illustCollection)
-                            .accessibilityLabel(ButtonType.illustCollection.label)
-                            .accessibilityIdentifier("illustCollection")
-                    }
-                }
-                .padding(.top, 53)
             }
+            .padding(.top, 53)
             Spacer()
         }
         .padding(margin)
