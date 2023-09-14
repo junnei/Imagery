@@ -33,6 +33,7 @@ struct AlbumGrid: View {
                                 .fill(Color.gray.opacity(0.5))
                                 .overlay {
                                     ProgressView()
+                                        .tint(Color.OasisColors.yellow)
                                 }
                         }
                         .frame(width: 150, height: 150)

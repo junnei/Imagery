@@ -60,8 +60,10 @@ struct AsyncImageView: View {
                         .frame(width: 390, height: 390)
                         .overlay {
                             VStack {
-                                Text("Loading...")
+                                Text("로딩 중입니다...")
+                                    .foregroundColor(Color.OasisColors.yellow)
                                 ProgressView()
+                                    .tint(Color.OasisColors.yellow)
                             }
                         }
                 }

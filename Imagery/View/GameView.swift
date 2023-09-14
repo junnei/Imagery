@@ -262,6 +262,7 @@ private extension GameView {
                         .opacity(0.5)
                         .overlay {
                             ProgressView()
+                                .tint(Color.OasisColors.yellow)
                         }
                 }
                 .frame(width: 300, height: 300)

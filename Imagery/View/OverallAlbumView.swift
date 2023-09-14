@@ -163,6 +163,7 @@ private extension OverallAlbumView {
                         .opacity(0.5)
                         .overlay {
                             ProgressView()
+                                .tint(Color.OasisColors.yellow)
                         }
                 }
                 .frame(width: 390, height: 390)
