@@ -329,11 +329,7 @@ private extension GameView {
                 Spacer()
                     .frame(width: 390, height: 390)
                 
-                VStack {
-                    Text("일러스트에 손을 가져다대어 그림을 느껴보세요")
-                    Text("현재 누르고 있는 이미지의 색의 명도에 따라")
-                    Text("밝을수록 진동이 세게 울려요.")
-                }
+                Text("일러스트에 손을 가져다대어 그림을 느껴보세요.\n현재 누르고 있는 이미지의 색의 명도에 따라 밝을수록 진동이 세게 울려요.")
                     .font(.headline)
                     .fontWeight(.semibold)
                     .foregroundColor(Color.OasisColors.darkGreen)
