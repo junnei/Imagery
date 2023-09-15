@@ -220,12 +220,16 @@ private extension GameView {
                 GameManager.shared.gameState = .initial
             } label: {
                 Image(systemName: HeaderItem.house.label)
+                    .font(.system(size: 20))
+                    .fontWeight(.bold)
+                    .frame(width: 36, height: 36)
                     .padding(3)
             }
             .frame(maxWidth: .infinity, alignment: .leading)
             
             Text("HP \(setHP(hp))")
             .font(.callout)
+            .fontWeight(.semibold)
             .fixedSize()
             .padding(.vertical, 4)
             .padding(.horizontal, 18)
@@ -241,6 +245,9 @@ private extension GameView {
                 GameManager.shared.gameState = .inIllustCollection
             } label: {
                 Image(systemName: HeaderItem.photo.label)
+                    .font(.system(size: 20))
+                    .fontWeight(.bold)
+                    .frame(width: 36, height: 36)
                     .padding(3)
             }
             .frame(maxWidth: .infinity, alignment: .trailing)
@@ -306,7 +313,9 @@ private extension GameView {
                     self.showImageOnly = false
                 } label: {
                     Image(systemName: HeaderItem.xmark.label)
+                        .font(.system(size: 20))
                         .fontWeight(.bold)
+                        .frame(width: 36, height: 36)
                         .foregroundColor(Color.OasisColors.white)
                         .frame(maxWidth: .infinity, alignment: .trailing)
                 }

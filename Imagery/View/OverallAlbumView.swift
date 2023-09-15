@@ -75,6 +75,9 @@ private extension OverallAlbumView {
                 GameManager.shared.gameState = .initial
             } label: {
                 Image(systemName: HeaderItem.back.label)
+                    .font(.system(size: 20))
+                    .fontWeight(.bold)
+                    .frame(width: 36, height: 36)
             }
             .frame(maxWidth: .infinity, alignment: .leading)
             
@@ -129,6 +132,9 @@ private extension OverallAlbumView {
                         self.showIllustPopup = false
                     } label: {
                         Image(systemName: "xmark")
+                            .font(.system(size: 20))
+                            .fontWeight(.bold)
+                            .frame(width: 36, height: 36)
                     }
                     .frame(maxWidth: .infinity, alignment: .trailing)
                 }

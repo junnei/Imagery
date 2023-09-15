@@ -139,6 +139,7 @@ struct OwnStoryView: View {
                         .fontWeight(.bold)
                         .padding(.leading, 8)
                         .padding(.bottom, 24)
+                        .frame(width: 36, height: 36)
                 }
                 
                 Text(title)
