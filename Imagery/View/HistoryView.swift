@@ -61,6 +61,9 @@ private extension HistoryView {
                 GameManager.shared.gameState = .initial
             } label: {
                 Image(systemName: HeaderItem.back.label)
+                    .font(.system(size: 20))
+                    .fontWeight(.bold)
+                    .frame(width: 36, height: 36)
             }
             .frame(maxWidth: .infinity, alignment: .leading)
             

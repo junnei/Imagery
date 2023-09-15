@@ -48,6 +48,9 @@ private extension InAlbumView {
                 GameManager.shared.gameState = .playing
             } label: {
                 Image(systemName: HeaderItem.back.label)
+                    .font(.system(size: 20))
+                    .fontWeight(.bold)
+                    .frame(width: 36, height: 36)
             }
             .frame(maxWidth: .infinity, alignment: .leading)
             
@@ -74,7 +77,9 @@ private extension InAlbumView {
                     self.showIllustPopup = false
                 } label: {
                     Image(systemName: HeaderItem.xmark.label)
+                        .font(.system(size: 20))
                         .fontWeight(.bold)
+                        .frame(width: 36, height: 36)
                         .foregroundColor(Color.OasisColors.white)
                         .frame(maxWidth: .infinity, alignment: .trailing)
                 }
