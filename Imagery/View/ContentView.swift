@@ -7,27 +7,40 @@
 
 import SwiftUI
 
-enum gameState{
-    case initial
-    case playing
-    case result
-    case history
-}
-
-
 struct ContentView: View {
     @StateObject var gameManager = GameManager.shared
+    
     @State private var isLoading = false
     var body: some View {
         ZStack {
-            Color.DarkGreen.darkGreen70.color
+            Color.OasisColors.darkGreen
                 .ignoresSafeArea()
+            
             switch gameManager.gameState {
             case .initial:
                 StartView()
-            case .playing, .result, .history:
+            case .ownStory:
+                OwnStoryView()
+            case .randomStory:
+                RandomStoryView()
+            case .playing, .result:
                 GameView()
+            case .storyHistory:
+                HistoryView()
+            case .inIllustCollection:
+                InAlbumView()
+            case .allIllustCollection:
+                OverallAlbumView()
             }
+        }
+        .onAppear {
+            if DataManager.shared.randomSubject == "로딩 중..." {
+                Task {
+                    await DataManager.shared.getSubject()
+                }
+            }
+            
+            HapticManager.shared.prepareHaptics()
         }
     }
 }

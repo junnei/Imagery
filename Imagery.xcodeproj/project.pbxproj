@@ -7,11 +7,20 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		5BF461BB2AA3B1F100E36BDA /* OwnStoryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BF461BA2AA3B1F100E36BDA /* OwnStoryView.swift */; };
+		5BF461BF2AA3EFDE00E36BDA /* RandomStoryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BF461BE2AA3EFDE00E36BDA /* RandomStoryView.swift */; };
+		5BF461C52AA4055A00E36BDA /* InAlbumView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BF461C42AA4055A00E36BDA /* InAlbumView.swift */; };
+		5BF461C72AA4056300E36BDA /* AlbumGrid.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BF461C62AA4056300E36BDA /* AlbumGrid.swift */; };
+		5BF461C92AA4059200E36BDA /* OverallAlbumView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BF461C82AA4059200E36BDA /* OverallAlbumView.swift */; };
+		BF08BAEA2AB2105F00B44385 /* AsyncImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF08BAE92AB2105F00B44385 /* AsyncImageView.swift */; };
+		BF08BAEC2AB2C73500B44385 /* HapticManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF08BAEB2AB2C73500B44385 /* HapticManager.swift */; };
+		BF23ED072AA434AD00851962 /* HistoryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF23ED062AA434AD00851962 /* HistoryView.swift */; };
+		BF23ED0A2AA435FF00851962 /* HistoryGrid.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF23ED092AA435FF00851962 /* HistoryGrid.swift */; };
 		BF9A267E2AA1270500F73E17 /* ImageryApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF9A267D2AA1270500F73E17 /* ImageryApp.swift */; };
 		BF9A26802AA1270500F73E17 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF9A267F2AA1270500F73E17 /* ContentView.swift */; };
 		BF9A26822AA1270600F73E17 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = BF9A26812AA1270600F73E17 /* Assets.xcassets */; };
 		BF9A26852AA1270600F73E17 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = BF9A26842AA1270600F73E17 /* Preview Assets.xcassets */; };
-		BF9A268C2AA1C8AA00F73E17 /* Color.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF9A268B2AA1C8AA00F73E17 /* Color.swift */; };
+		BF9A268C2AA1C8AA00F73E17 /* Color+.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF9A268B2AA1C8AA00F73E17 /* Color+.swift */; };
 		BF9A268F2AA1E86700F73E17 /* StartView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF9A268E2AA1E86700F73E17 /* StartView.swift */; };
 		BF9A26912AA1E93100F73E17 /* GameManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF9A26902AA1E93100F73E17 /* GameManager.swift */; };
 		BF9A26932AA1E99E00F73E17 /* GameView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF9A26922AA1E99E00F73E17 /* GameView.swift */; };
@@ -21,12 +30,21 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		5BF461BA2AA3B1F100E36BDA /* OwnStoryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OwnStoryView.swift; sourceTree = "<group>"; };
+		5BF461BE2AA3EFDE00E36BDA /* RandomStoryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RandomStoryView.swift; sourceTree = "<group>"; };
+		5BF461C42AA4055A00E36BDA /* InAlbumView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InAlbumView.swift; sourceTree = "<group>"; };
+		5BF461C62AA4056300E36BDA /* AlbumGrid.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AlbumGrid.swift; sourceTree = "<group>"; };
+		5BF461C82AA4059200E36BDA /* OverallAlbumView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OverallAlbumView.swift; sourceTree = "<group>"; };
+		BF08BAE92AB2105F00B44385 /* AsyncImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AsyncImageView.swift; sourceTree = "<group>"; };
+		BF08BAEB2AB2C73500B44385 /* HapticManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HapticManager.swift; sourceTree = "<group>"; };
+		BF23ED062AA434AD00851962 /* HistoryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HistoryView.swift; sourceTree = "<group>"; };
+		BF23ED092AA435FF00851962 /* HistoryGrid.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HistoryGrid.swift; sourceTree = "<group>"; };
 		BF9A267A2AA1270500F73E17 /* Imagery.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Imagery.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		BF9A267D2AA1270500F73E17 /* ImageryApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageryApp.swift; sourceTree = "<group>"; };
 		BF9A267F2AA1270500F73E17 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		BF9A26812AA1270600F73E17 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		BF9A26842AA1270600F73E17 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
-		BF9A268B2AA1C8AA00F73E17 /* Color.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Color.swift; sourceTree = "<group>"; };
+		BF9A268B2AA1C8AA00F73E17 /* Color+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Color+.swift"; sourceTree = "<group>"; };
 		BF9A268D2AA1E81000F73E17 /* Instruction.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = Instruction.json; sourceTree = "<group>"; };
 		BF9A268E2AA1E86700F73E17 /* StartView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StartView.swift; sourceTree = "<group>"; };
 		BF9A26902AA1E93100F73E17 /* GameManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameManager.swift; sourceTree = "<group>"; };
@@ -46,6 +64,23 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		5BD0C3CD2AA35DA400EB759D /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				BF9A268B2AA1C8AA00F73E17 /* Color+.swift */,
+			);
+			path = Extensions;
+			sourceTree = "<group>";
+		};
+		BF23ED082AA434EA00851962 /* Album */ = {
+			isa = PBXGroup;
+			children = (
+				5BF461C62AA4056300E36BDA /* AlbumGrid.swift */,
+				5BF461C42AA4055A00E36BDA /* InAlbumView.swift */,
+			);
+			path = Album;
+			sourceTree = "<group>";
+		};
 		BF9A26712AA1270500F73E17 = {
 			isa = PBXGroup;
 			children = (
@@ -66,6 +101,7 @@
 			isa = PBXGroup;
 			children = (
 				BF9A26962AA1E9D200F73E17 /* Resources */,
+				5BD0C3CD2AA35DA400EB759D /* Extensions */,
 				BF9A26952AA1E9C500F73E17 /* Model */,
 				BF9A26942AA1E9AE00F73E17 /* View */,
 				BF9A26832AA1270600F73E17 /* Preview Content */,
@@ -87,7 +123,14 @@
 			children = (
 				BF9A267F2AA1270500F73E17 /* ContentView.swift */,
 				BF9A268E2AA1E86700F73E17 /* StartView.swift */,
+				5BF461BA2AA3B1F100E36BDA /* OwnStoryView.swift */,
+				5BF461BE2AA3EFDE00E36BDA /* RandomStoryView.swift */,
+				5BF461C82AA4059200E36BDA /* OverallAlbumView.swift */,
+				BF23ED062AA434AD00851962 /* HistoryView.swift */,
+				BF23ED092AA435FF00851962 /* HistoryGrid.swift */,
 				BF9A26922AA1E99E00F73E17 /* GameView.swift */,
+				BF23ED082AA434EA00851962 /* Album */,
+				BF08BAE92AB2105F00B44385 /* AsyncImageView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -95,10 +138,10 @@
 		BF9A26952AA1E9C500F73E17 /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				BF9A268B2AA1C8AA00F73E17 /* Color.swift */,
 				BF9A26902AA1E93100F73E17 /* GameManager.swift */,
 				BF9A269A2AA1EEBB00F73E17 /* DataManager.swift */,
 				BF9A26972AA1EA4800F73E17 /* Item.swift */,
+				BF08BAEB2AB2C73500B44385 /* HapticManager.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -149,11 +192,12 @@
 			};
 			buildConfigurationList = BF9A26752AA1270500F73E17 /* Build configuration list for PBXProject "Imagery" */;
 			compatibilityVersion = "Xcode 14.0";
-			developmentRegion = en;
+			developmentRegion = ko;
 			hasScannedForEncodings = 0;
 			knownRegions = (
 				en,
 				Base,
+				ko,
 			);
 			mainGroup = BF9A26712AA1270500F73E17;
 			productRefGroup = BF9A267B2AA1270500F73E17 /* Products */;
@@ -186,11 +230,20 @@
 				BF9A26802AA1270500F73E17 /* ContentView.swift in Sources */,
 				BF9A269B2AA1EEBB00F73E17 /* DataManager.swift in Sources */,
 				BF9A267E2AA1270500F73E17 /* ImageryApp.swift in Sources */,
-				BF9A268C2AA1C8AA00F73E17 /* Color.swift in Sources */,
+				BF9A268C2AA1C8AA00F73E17 /* Color+.swift in Sources */,
+				5BF461BB2AA3B1F100E36BDA /* OwnStoryView.swift in Sources */,
 				BF9A268F2AA1E86700F73E17 /* StartView.swift in Sources */,
+				5BF461C52AA4055A00E36BDA /* InAlbumView.swift in Sources */,
+				BF23ED072AA434AD00851962 /* HistoryView.swift in Sources */,
+				5BF461C92AA4059200E36BDA /* OverallAlbumView.swift in Sources */,
 				BF9A26982AA1EA4800F73E17 /* Item.swift in Sources */,
+				5BF461BF2AA3EFDE00E36BDA /* RandomStoryView.swift in Sources */,
+				5BF461C72AA4056300E36BDA /* AlbumGrid.swift in Sources */,
+				BF08BAEA2AB2105F00B44385 /* AsyncImageView.swift in Sources */,
 				BF9A26932AA1E99E00F73E17 /* GameView.swift in Sources */,
+				BF23ED0A2AA435FF00851962 /* HistoryGrid.swift in Sources */,
 				BF9A26912AA1E93100F73E17 /* GameManager.swift in Sources */,
+				BF08BAEC2AB2C73500B44385 /* HapticManager.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -327,8 +380,9 @@
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UIStatusBarStyle = "";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -358,8 +412,9 @@
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UIStatusBarStyle = "";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
