@@ -278,7 +278,18 @@ private extension GameView {
                 .onTapGesture {
                     self.showImageOnly = true
                 }
-                .padding(.bottom, 12)
+                .padding(.bottom, 18)
+                
+                Text("위의 일러스트를 눌러보세요.")
+                    .font(.footnote)
+                    .foregroundColor(Color.OasisColors.darkGreen)
+                    .padding(.vertical, 6)
+                    .frame(maxWidth: .infinity)
+                    .background(
+                        RoundedRectangle(cornerRadius: 12)
+                            .fill(Color.OasisColors.yellow)
+                    )
+                    .padding(.bottom, 18)
             }
             
             HStack {
